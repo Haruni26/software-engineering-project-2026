@@ -1,0 +1,18 @@
+[
+  {
+    "model": "api.sighting",
+    "pk": 1,
+    "fields": {
+      "species": "Osprey",
+      "location": "SRID=4326;POINT(-63.5752 44.6488)"
+    }
+  },
+  {
+    "model": "api.sighting",
+    "pk": 2,
+    "fields": {
+      "species": "Bald Eagle",
+      "location": "SRID=4326;POINT(-63.6000 44.6600)"
+    }
+  }
+]

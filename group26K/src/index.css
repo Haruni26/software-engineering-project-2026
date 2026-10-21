@@ -1,0 +1,194 @@
+/**
+ * @file Index.css
+ * @description Global and responsive styling for the Woodland Conservation Site, including dark mode and navigation responsiveness.
+ * This file uses Tailwind CSS for utilities and extends global styles for custom elements.
+ *
+ * Author: Raish Raj Joshi,
+ *         Mohammad Zaid Khan - Fixed dark mode.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Calibri", sans-serif; /* Global font family */
+  font-weight: 300;
+  @apply transition-colors duration-200; /* Smooth color transitions */
+}
+
+:root {
+  --mainColor-dark: #1c1f26; /* Dark background */
+  --navbarColor-dark: #2f3542; /* Dark navbar background */
+  --textColor-dark: #f0e68c; /* Dark mode text color (pale yellow) */
+}
+
+/* Dark Mode Overrides */
+.dark body {
+  background-color: var(--mainColor-dark);
+  color: var(--textColor-dark);
+}
+
+.dark header {
+  background-color: var(--navbarColor-dark); /* Dark mode navbar */
+}
+
+/* Dark mode text fixes - Mohammad*/
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark p,
+.dark label,
+.dark span,
+.dark div {
+  color: var(--textColor-dark);
+}
+
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: var(--navbarColor-dark);
+  color: var(--textColor-dark);
+  border: 1px solid var(--textColor-dark);
+}
+
+/* Navigation Links */
+nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  font-size: 1.25rem;
+  transition: color 0.2s ease;
+}
+
+nav a.active {
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
+/* Dark Mode Navigation Links */
+.dark nav a {
+  color: var(--textColor-dark); /* Dark mode text color */
+}
+
+.dark nav a:hover {
+  color: var(--secondaryColor-dark); /* Dark mode hover effect */
+}
+
+.dark nav a.active {
+  background-color: var(--secondaryColor-dark);
+  color: white;
+}
+
+/* Mobile and Tablet Responsive Navigation */
+@media only screen and (max-width: 1024px) {
+  header .nav-btn {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  header nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    transform: translateY(-100vh);
+    transition: transform 1s ease;
+    z-index: 50;
+  }
+  .map-label {
+  background: white;
+  border: 1px solid #888;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.sightings-label { border-color: #2f7ed8; }
+.locations-label { border-color: #2ecc71; }
+
+  /* Responsive Navbar for Dark Mode */
+  .dark header nav {
+    background-color: var(--navbarColor-dark); /* Dark mode navbar */
+  }
+
+  header .responsive_nav {
+    transform: translateY(0);
+  }
+
+  nav .nav-close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.5;
+  }
+}
+/*Accessibility Tab*/
+/* Text Size Options */
+tml.text-small {
+  font-size: 0.875rem; /* ~14px */
+}
+html.text-medium {
+  font-size: 1rem; /* ~16px */
+}
+html.text-large {
+  font-size: 1.25rem; /* ~20px */
+}
+html.text-massive {
+  font-size: 1.50rem; /* ~24px */
+}
+
+/* Default Mode: Use Tailwind's default white/black colors */
+html.contrast-default,
+html.contrast-default body { 
+  @apply bg-white text-black; 
+}
+
+/* Dark Mode: Ensure full page coverage by targeting body */
+html.contrast-dark,
+html.contrast-dark body {
+  /* Use the custom variables defined earlier */
+  background-color: var(--mainColor-dark); 
+  color: var(--textColor-dark); 
+}
+
+html.contrast-greyscale { 
+  /* Use the explicit values, or apply Tailwind classes if they match */
+  filter: grayscale(100%);
+}
+/* Inverted Mode: This is highly optimized already, no change needed */
+html.contrast-inverted { 
+  filter: invert(100%); 
+}
+/* Line Spacing Options */
+html.linespace-default body {
+  line-height: 1.5; /* current default */
+}
+
+html.linespace-2 body {
+  line-height: 2;
+}
+
+html.linespace-3 body{
+  line-height: 3;
+}
+
+html.linespace-4 body{
+  line-height: 4;
+}

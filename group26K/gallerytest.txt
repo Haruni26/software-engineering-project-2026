@@ -1,0 +1,268 @@
+/*A React component that uses tailwind css containing a parallax gallery which
+ * also includes an add image section.
+ *
+ *@author Aaron Jayawardana
+*@McGregor Bodie
+ *
+ * */
+import React, { useState, useEffect } from 'react';
+import './Gallery.css';  // Custom CSS since no tailwind support for Parallax
+
+// Import images for the parallax section
+// Image source: https://stock.adobe.com/ca
+import image1 from '../assets/image1.jpg';
+import image2 from '../assets/image2.jpg';
+import image3 from '../assets/image3.jpg';
+import image4 from '../assets/image4.jpg';
+
+
+function Gallery() {
+  // Stores the uploaded images with name, description and upload date
+  // { src, imageName, description, uploadedAt, category }
+  const [images, setImages] = useState([]);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [tempName, setTempName] = useState('');
+  const [tempDescription, setTempDescription] = useState('');
+  const [tempCategory, setTempCategory] = useState('');
+
+  // Helper to format the upload date nicely
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const d = new Date(dateString);
+    if (isNaN(d)) return dateString;
+    return d.toLocaleString();
+  };
+
+  // Load saved images from localStorage on first render
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('galleryUploadedImages');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          const now = new Date().toISOString();
+          const normalized = parsed.map((item) => {
+            if (typeof item === 'string') {
+              return {
+                src: item,
+                imageName: '',
+                description: '',
+                category: '',
+                uploadedAt: now,
+              };
+            }
+            return {
+              src: item.src || item,
+              imageName: item.imageName || item.description || '',
+              description: item.description || '',
+              category: item.category || '',
+              uploadedAt: item.uploadedAt || now,
+            };
+          });
+          setImages(normalized);
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load images from localStorage', e);
+    }
+  }, []);
+
+  // Save images to localStorage whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem('galleryUploadedImages', JSON.stringify(images));
+    } catch (e) {
+      console.error('Failed to save images to localStorage', e);
+    }
+  }, [images]);
+
+  // ✅ NEW: Upload file to backend storage instead of FileReader/local base64
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file); // "file" must match what your backend expects
+
+      const response = await fetch('http://localhost:5000/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        console.error('Upload failed with status', response.status);
+        return;
+      }
+
+      const data = await response.json();
+      // Expecting: { url: 'https://your-storage.com/path/to/image.jpg' }
+      const imageUrl = data.url;
+
+      setImages((prevImages) => [
+        ...prevImages,
+        {
+          src: imageUrl,
+          imageName: file.name,
+          description: '',
+          category: '',
+          uploadedAt: new Date().toISOString(),
+        },
+      ]);
+    } catch (err) {
+      console.error('Error uploading file:', err);
+    }
+  };
+
+  const handleEditClick = (index, image) => {
+    setEditingIndex(index);
+    setTempName(image.imageName || '');
+    setTempDescription(image.description || '');
+    setTempCategory(image.category || '');
+  };
+
+  const handleSaveClick = () => {
+    if (editingIndex === null) return;
+    setImages((prevImages) =>
+      prevImages.map((img, idx) =>
+        idx === editingIndex
+          ? {
+              ...img,
+              imageName: tempName,
+              description: tempDescription,
+              category: tempCategory,
+            }
+          : img
+      )
+    );
+    setEditingIndex(null);
+    setTempName('');
+    setTempDescription('');
+    setTempCategory('');
+  };
+
+  return (
+    <div className="Gallery">
+      <div className="parallax-container" style={{ backgroundImage: `url(${image1})` }}>
+        <div className="parallax-content">
+          <h1 className="parallax-heading text-5xl font-bold text-white text-shadow-lg">Gallery</h1>
+        </div>
+      </div>
+
+      <div className="parallax-container" style={{ backgroundImage: `url(${image2})` }}>
+        <div className="parallax-content"></div>
+      </div>
+
+      <div className="parallax-container" style={{ backgroundImage: `url(${image3})` }}>
+        <div className="parallax-content"></div>
+      </div>
+
+      <div className="parallax-container" style={{ backgroundImage: `url(${image4})` }}>
+        <div className="parallax-content"></div>
+      </div>
+
+      <section className="bg-gray-900 text-white p-8 text-center">
+        <h2 className="text-3xl font-semibold mb-4">Add Your Own Image</h2>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="bg-gray-700 text-white px-4 py-2 rounded cursor-pointer"
+        />
+      </section>
+
+      <section className="bg-gray-100 p-8">
+        <h2 className="text-3xl font-semibold mb-4 text-center">Uploaded Images</h2>
+
+        <div className="space-y-8">
+          {images.map((image, index) => {
+            const isEven = index % 2 === 0;
+            const src = image.src || '';
+            const imageName = image.imageName || `Image ${index + 1}`;
+            const category = image.category || 'flora/fauna/Fungi';
+            const description = image.description || 'Image description';
+            const uploadedAt = image.uploadedAt;
+            const isEditing = editingIndex === index;
+
+            return (
+              <div
+                key={index}
+                className={`flex flex-col md:flex-row ${
+                  !isEven ? 'md:flex-row-reverse' : ''
+                } items-center gap-6`}
+              >
+                {/* Uploaded Image */}
+                <div className="md:w-1/2 overflow-hidden rounded-lg shadow-lg">
+                  <img
+                    src={src}
+                    alt={imageName || `Uploaded ${index}`}
+                    className="uploaded-image rounded-t-lg transition-all duration-300 transform hover:scale-105"
+                  />
+                  {uploadedAt && (
+                    <div className="px-4 py-2 text-xs text-gray-500 text-right">
+                      Uploaded: {formatDate(uploadedAt)}
+                    </div>
+                  )}
+                </div>
+
+                {/* Description */}
+                <div className="md:w-1/2 flex items-center">
+                  <div className="w-full bg-white rounded-lg shadow-lg p-4">
+                    {isEditing ? (
+                      <>
+                        <input
+                          type="text"
+                          className="w-full border border-gray-300 rounded p-2 mb-3 text-gray-800"
+                          placeholder="Enter image name"
+                          value={tempName}
+                          onChange={(e) => setTempName(e.target.value)}
+                        />
+                        <select
+                          className="w-full border border-gray-300 rounded p-2 mb-3 text-gray-800"
+                          value={tempCategory}
+                          onChange={(e) => setTempCategory(e.target.value)}
+                        >
+                          <option value="">Select category</option>
+                          <option value="Flora">Flora</option>
+                          <option value="Fauna">Fauna</option>
+                          <option value="Fungi">Fungi</option>
+                        </select>
+                        <textarea
+                          className="w-full border border-gray-300 rounded p-2 mb-3 text-gray-800"
+                          rows={3}
+                          placeholder="Enter a description"
+                          value={tempDescription}
+                          onChange={(e) => setTempDescription(e.target.value)}
+                        />
+                        <button
+                          onClick={handleSaveClick}
+                          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mr-2"
+                        >
+                          Save
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <h3 className="text-lg font-semibold mb-2">{imageName}</h3>
+                        <h3 className="text-lg font-semibold mb-2">{category}</h3>
+                        <p className="text-gray-700 break-words mb-3">{description}</p>
+                        <button
+                          onClick={() => handleEditClick(index, image)}
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                        >
+                          Upload Description
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default Gallery;

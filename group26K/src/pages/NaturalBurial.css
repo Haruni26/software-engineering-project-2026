@@ -1,0 +1,267 @@
+/**@author Rakhuzuwo
+ * @file NaturalBurial.css
+ * @description Stylesheet for Natural Burial page, defining layout, typography,
+ * card grids, modal design, buttons, and general page theming.
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9f7;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+  background-color: #2d4a2d;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.site-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.nav li {
+  margin: 0 15px;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.nav a:hover, .nav a.active {
+  background-color: #3a5c3a;
+}
+
+/* Main Content */
+.main-content {
+  padding: 3rem 0;
+  min-height: calc(100vh - 140px);
+}
+
+.description-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.description-section h2 {
+  color: #2d4a2d;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.description-section p {
+  line-height: 1.8;
+  color: #555;
+}
+
+/* Info Cards */
+.info-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.info-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.info-card h3 {
+  color: #2d4a2d;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.info-card p {
+  color: #666;
+  line-height: 1.6;
+}
+ 
+.info-card button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  padding: 12px 24px;
+  font-family: 'Segoe UI', sans-serif; /* Clean font */
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+
+.info-card button:hover {
+  background-color: #333;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.info-card button:active {
+  transform: translateY(0); /* Return to original position */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on click */
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 10px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 60%;
+  max-width: 90%;      /* make modal fit smaller screens */
+  max-height: 85vh;    /* prevent it from growing too tall */
+  overflow-y: auto;    /* enable scrolling inside modal */
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.modal-content img.modal-image {
+  width: 50%;
+  height: auto;
+  max-height: 40vh;  /* limit image height to 40% of viewport */
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 12px;
+}
+
+
+.modal-content h2 {
+  color: #2d4a2d;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.modal-content p {
+  line-height: 1.6;
+  color: #555;
+  text-align: justify;
+}
+
+.close-button {
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background:#333;
+  color:white;
+  border:none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor:pointer;
+}
+.close-button:hover {
+  background-color: #1a2d1a;
+}
+/* Dark mode for info cards */
+.dark .description-section{
+  background-color: var(--mainColor-dark);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+}
+.dark .description-section p{
+  color: #ddd;
+}
+.dark .info-card {
+  background-color: var(--mainColor-dark); /* matches main page dark bg */
+  color: var(--textColor-dark);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05); /* subtle shadow for dark bg */
+}
+
+.dark .info-card h3 {
+  color: var(--textColor-dark);
+}
+
+.dark .info-card p {
+  color: #ddd;
+}
+
+.dark .info-card button {
+  background-color: #444;
+  color: white;
+}
+
+.dark .info-card button:hover {
+  background-color: #64c0b1;
+}
+
+.dark .modal-content {
+  background-color: var(--mainColor-dark);
+}
+
+
+
+
+/* Footer */
+.footer {
+  background-color: #2d4a2d;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav li {
+    margin: 5px 0;
+  }
+  
+  .info-sections {
+    grid-template-columns: 1fr;
+  }
+  
+}
