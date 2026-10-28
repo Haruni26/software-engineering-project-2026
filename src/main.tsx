@@ -1,17 +1,19 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import './assets/css/index.css';
-import { LandingPage } from './pages/landing';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import "./assets/css/index.css";
+import { LandingPage } from "./pages/landing";
+import { Header } from "./components/header";
 
-const root = document.getElementById('root');
+const root = document.getElementById("root");
 
 createRoot(root!).render(
-	<StrictMode>
-		<Router>
-			<Routes>
-				<Route path='/' element={<LandingPage />} />
-			</Routes>
-		</Router>
-	</StrictMode>,
+  <StrictMode>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
+    </Router>
+  </StrictMode>,
 );
