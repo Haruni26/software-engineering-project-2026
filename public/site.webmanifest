@@ -1,0 +1,30 @@
+{
+    "name": "Woodland Conservation Area",
+    "short_name": "Woodland",
+    "description": "Explore the forests, wildlife, trails and natural heritage of St. Margaret's Bay, Nova Scotia.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#f8f5e7",
+    "theme_color": "#123e30",
+    "icons": [
+        {
+            "src": "/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
