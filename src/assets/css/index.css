@@ -1,1 +1,85 @@
 @import 'tailwindcss';
+
+::selection {
+	@apply bg-[#15362f] text-white;
+}
+
+html,
+body {
+}
+
+a,
+input,
+button,
+select,
+textarea {
+	@apply transition-all duration-300 ease-in-out
+    outline-hidden ring-0
+    hover:outline-hidden hover:ring-0
+    focus:outline-hidden focus:ring-0
+    active:outline-hidden active:ring-0
+    disabled:opacity-50 disabled:pointer-events-none;
+}
+
+a,
+button {
+	@apply cursor-pointer;
+}
+
+button {
+	@apply select-none;
+}
+
+@keyframes tree-sway {
+	0%,
+	100% {
+		transform: rotate(calc(var(--tree-rotation) - 2deg));
+	}
+
+	50% {
+		transform: rotate(calc(var(--tree-rotation) + 2deg));
+	}
+}
+
+.tree-sway {
+	animation: tree-sway 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tree-sway {
+		animation: none;
+	}
+}
+
+.nunito {
+	font-family: 'Nunito', sans-serif;
+	font-weight: 800;
+	font-size: 20px;
+	line-height: 1.1;
+	letter-spacing: -0.5px;
+}
+
+.nav-link {
+	@apply px-3 py-1.5
+    inline-flex items-center justify-center
+    font-semibold text-base text-neutral-900 hover:text-white focus:text-white active:text-white
+    rounded-xl
+    bg-[#f5efd5] hover:bg-[#15362f] focus:bg-[#15362f] active:bg-[#15362f];
+}
+
+.btn {
+	@apply select-none cursor-pointer
+    px-3 py-1.5
+    inline-flex items-center justify-center gap-2
+    font-semibold text-base
+    rounded-xl;
+}
+
+.btn-primary {
+	@apply text-white! hover:text-white focus:text-white active:text-white
+    bg-[#15362f] hover:bg-[#15362f]/90 focus:bg-[#15362f]/90 active:bg-[#15362f]/90;
+}
+
+.btn-icon {
+	@apply p-1.5! aspect-square!;
+}
