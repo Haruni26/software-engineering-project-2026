@@ -52,7 +52,7 @@ const Footer = () => {
 	};
 
 	return (
-		<footer className='relative bg-[#123e30] text-[#f8f5e7] overflow-hidden selection:bg-[#cfe0cb]! selection:text-[#123e30]!'>
+		<footer className='relative bg-forest-900 text-cream-300 overflow-hidden selection:bg-sage-200! selection:text-forest-900!'>
 			<div className='relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-8 sm:px-10 lg:px-12'>
 				<div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-x-8 gap-y-12'>
 					<div className='max-w-xs col-span-2 md:col-span-1'>
@@ -60,10 +60,10 @@ const Footer = () => {
 							Woodland Conservation Area
 						</Link>
 
-						<p className='mt-2 text-sm text-[#bfcfbf] leading-relaxed'>A special place for people, wildlife, and future generations.</p>
+						<p className='mt-2 text-sm text-muted-green-500 leading-relaxed'>A special place for people, wildlife, and future generations.</p>
 
-						<div className='mt-6 flex items-start gap-2 text-sm text-[#cfe0cb]'>
-							<MapPin className='select-none size-5 mt-0.5 shrink-0 text-[#b4da91]' />
+						<div className='mt-6 flex items-start gap-2 text-sm text-sage-200'>
+							<MapPin className='select-none size-5 mt-0.5 shrink-0 text-sage-300' />
 
 							<span>
 								St. Margaret&apos;s Bay
@@ -75,12 +75,12 @@ const Footer = () => {
 
 					{Object.entries(footerLinks).map(([title, links]) => (
 						<div key={title}>
-							<h4 className='mb-5 font-extrabold text-sm text-[#d8efbd] tracking-wide'>{title}</h4>
+							<h4 className='mb-5 font-extrabold text-sm text-muted-green-200 tracking-wide'>{title}</h4>
 
 							<ul className='space-y-3.5'>
 								{links.map((link, idx: number) => (
 									<li key={idx}>
-										<Link to={link?.href} className='group inline-flex items-center gap-1 text-sm text-[#c3d1c3] hover:text-white'>
+										<Link to={link?.href} className='group inline-flex items-center gap-1 text-sm text-muted-green-400 hover:text-white'>
 											{link?.label}
 											<ArrowUpRight className='size-3.5 transition-all opacity-0 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100' />
 										</Link>
@@ -92,9 +92,9 @@ const Footer = () => {
 				</div>
 
 				<div className='mt-10 pt-7 flex flex-col sm:flex-row items-center justify-between gap-5 border-t border-white/15 text-center sm:text-left'>
-					<p className='text-xs text-[#a5bca8]'>Copyright &copy; {currentYear} Woodland Conservation Area. All rights reserved.</p>
+					<p className='text-xs text-muted-green-300'>Copyright &copy; {currentYear} Woodland Conservation Area. All rights reserved.</p>
 
-					<div className='flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-[#a5bca8]'>
+					<div className='flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-green-300'>
 						<Link to='/' className='hover:text-white'>
 							Privacy
 						</Link>
