@@ -121,7 +121,9 @@ const LandingPage = () => {
 
 		updateParallax();
 
-		window.addEventListener('scroll', handleScroll, { passive: true });
+		window.addEventListener('scroll', handleScroll, {
+			passive: true,
+		});
 
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
@@ -189,7 +191,7 @@ const LandingPage = () => {
 				</div>
 			</section>
 
-			<section id='trees' className='mx-3 my-5 overflow-hidden rounded-[26px] bg-[#cce9b2] shadow-md sm:mx-5 dark:bg-[#254936]'>
+			<section className='mx-3 my-5 overflow-hidden rounded-[26px] bg-[#cce9b2] shadow-md sm:mx-5 dark:bg-[#254936]'>
 				<div className='flex items-center gap-3 border-b border-green-900/10 bg-[#fff9e2] p-5 dark:bg-[#203b2f]'>
 					<TreePine className='text-green-800 dark:text-green-200' size={30} />
 
