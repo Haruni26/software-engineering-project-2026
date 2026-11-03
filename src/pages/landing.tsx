@@ -166,7 +166,7 @@ const LandingPage = () => {
 			</section>
 
 			<section className='relative z-10 w-full px-4 sm:px-8 lg:px-12 py-20'>
-				<div className='max-w-360 mx-auto p-3 sm:p-5 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 rounded-[28px] bg-[#fff9dc] dark:bg-[#15362f] shadow-xl overflow-hidden'>
+				<div className='max-w-360 mx-auto p-3 sm:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 rounded-[28px] bg-[#fff9dc] dark:bg-[#15362f] shadow-xl overflow-hidden'>
 					{featureCards?.map((card: CardType, idx: number) => {
 						return <Card key={idx} {...card} />;
 					})}
@@ -262,7 +262,7 @@ const LandingPage = () => {
 					</div>
 				</div>
 
-				<div className='max-w-360 mx-auto p-3 sm:p-5 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 rounded-[28px] bg-[#fff9dc] dark:bg-[#15362f] shadow-xl overflow-hidden'>
+				<div className='max-w-360 mx-auto p-3 sm:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 rounded-[28px] bg-[#fff9dc] dark:bg-[#15362f] shadow-xl overflow-hidden'>
 					{kidsCards?.map((card: CardType, idx: number) => {
 						return <Card key={idx} {...card} />;
 					})}
