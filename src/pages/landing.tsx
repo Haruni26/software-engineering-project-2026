@@ -14,8 +14,6 @@ import { Card } from '../components/card';
 
 const lakePhoto = 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1100&q=85';
 
-type Tab = 'Fun Facts' | 'My Role' | "In Mi'kmaq";
-
 function say(text: string) {
 	if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
 		return;
