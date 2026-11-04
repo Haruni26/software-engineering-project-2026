@@ -166,7 +166,7 @@ const LandingPage = () => {
 			</section>
 
 			<section className='relative z-10 w-full px-4 sm:px-8 lg:px-12'>
-				<div className='max-w-360 mx-auto p-3 sm:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 rounded-[28px] bg-forest-800 dark:bg-cream-300 shadow-xl overflow-hidden'>
+				<div className='max-w-360 mx-auto p-3 sm:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 rounded-4xl bg-forest-800 dark:bg-cream-300 shadow-xl overflow-hidden'>
 					{featureCards?.map((card: CardType, idx: number) => {
 						return <Card key={idx} {...card} />;
 					})}
@@ -174,11 +174,11 @@ const LandingPage = () => {
 			</section>
 
 			<section className='relative z-10 w-full px-4 sm:px-8 lg:px-12'>
-				<div className='mx-auto grid max-w-360 overflow-hidden rounded-[32px] bg-forest-800 text-cream-50 shadow-xl lg:grid-cols-[1.05fr_.95fr]'>
-					<div className='flex flex-col justify-between p-6 sm:p-10 lg:p-14'>
+				<div className='max-w-360 mx-auto p-3 sm:p-5 grid lg:grid-cols-[1.05fr_.95fr] gap-3 sm:gap-5 rounded-4xl bg-forest-800 dark:bg-cream-300 shadow-xl text-cream-50 overflow-hidden'>
+					<div className='p-6 sm:p-10 lg:p-14 flex flex-col justify-between rounded-4xl bg-cream-300 dark:bg-forest-800'>
 						<div>
-							<div className='mb-6 inline-flex items-center gap-2 rounded-full border border-sage-300/30 bg-sage-300/10 px-3 py-1.5 text-sm font-bold text-sage-300'>
-								<Leaf className='size-4' />
+							<div className='mb-6 px-3 py-1.5 inline-flex items-center gap-2 rounded-full border border-sage-300/30 bg-sage-300/10 font-bold text-sm text-sage-300'>
+								<Leaf className='select-none size-4 shrink-0' />
 								Our shared home
 							</div>
 
@@ -205,9 +205,10 @@ const LandingPage = () => {
 						</div>
 					</div>
 
-					<div className='relative min-h-72 overflow-hidden bg-sage-200 lg:min-h-full'>
-						<img src={lakePhoto} alt='A calm lake surrounded by woodland' className='size-full object-cover transition-transform duration-700 hover:scale-105' />
-						<div className='absolute inset-0 bg-gradient-to-t from-forest-950/60 via-transparent to-transparent' />
+					<div className='relative min-h-72 lg:min-h-full rounded-4xl bg-sage-200 overflow-hidden'>
+						<img className='size-full object-cover transition-transform duration-700 hover:scale-105' src={lakePhoto} alt='A calm lake surrounded by woodland' />
+
+						<div className='absolute inset-0 bg-linear-to-t from-forest-950/60 via-transparent to-transparent' />
 
 						<div className='absolute right-5 bottom-5 left-5 flex items-end justify-between gap-4 text-white'>
 							<p className='max-w-xs text-sm font-bold leading-relaxed'>Protect the quiet places. Share the wonder.</p>
