@@ -154,6 +154,29 @@ className={cn(
 )}
 ```
 
+## SEO and React Helmet
+
+The site currently uses static metadata in `index.html`. Helmet is a convention for future route-level SEO work. Keep document-wide settings such as the viewport, favicons, and manifest in the HTML shell.
+
+- Use one shared `PageSeo` component per real route. Use `Page title | Woodland Conservation Area` for secondary pages and preserve the existing home title. Write a unique description that reflects the visible page content.
+- Set the canonical URL and `og:url` from the confirmed production origin and the canonical route path. Use absolute URLs for social images, with meaningful image alt text. Keep Open Graph and Twitter titles, descriptions, and images consistent with the page metadata.
+- Keep the metadata language aligned with the visible content. Add alternate language URLs only once translated pages have their own URLs.
+- If implementing Helmet, use the React 19-compatible `react-helmet-async` v3 API. Import `Helmet` from that package in `PageSeo`. On React 19, the package delegates tag placement to React. See the [React Helmet Async documentation](https://github.com/staylor/react-helmet-async#react-19).
+- Assign one owner to each route-specific tag. When moving metadata from the HTML shell to route rendering, verify that the resulting head has one title, one description, one canonical link, and one value for each social field. Check direct loads and client-side navigation in both directions.
+- For reliable route-specific previews, serve the tags in the initial HTML through prerendering or server rendering. Inspect the raw response for each published route as well as the rendered head. Include completed canonical routes in the sitemap and keep placeholder destinations out of it.
+
+Suggested component usage after the SEO setup is in place
+
+```tsx
+<PageSeo
+	title='Explore'
+	description='Discover woodland trails, wildlife, and the natural beauty of St. Margaret’s Bay.'
+	path='/explore'
+	image='/og-image.png'
+	imageAlt='Woodland Conservation Area'
+/>
+```
+
 ## Handoff checklist
 
 1. Check the current route in `src/main.tsx`. Several destinations currently render `LandingPage` as a placeholder.
