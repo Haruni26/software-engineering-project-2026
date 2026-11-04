@@ -158,7 +158,7 @@ const Header = () => {
 							<button
 								type='button'
 								onClick={() => setIsLanguageMenuOpen((current) => !current)}
-								className='min-h-10 min-w-36 px-3 py-1.5 inline-flex items-center justify-between gap-2 rounded-lg border-2 border-forest-800 font-semibold text-sm text-forest-800 hover:text-forest-800 focus:text-forest-800 active:text-forest-800 bg-neutral-warm hover:bg-neutral-warm/90 focus:bg-neutral-warm/90 active:bg-neutral-warm/90'
+								className='min-h-10 min-w-36 px-3 py-1.5 inline-flex items-center justify-between gap-2 rounded-xl border-2 border-forest-800 font-semibold text-sm text-forest-800 hover:text-forest-800 focus:text-forest-800 active:text-forest-800 bg-neutral-warm hover:bg-neutral-warm/90 focus:bg-neutral-warm/90 active:bg-neutral-warm/90'
 								aria-label='Select language'
 								aria-haspopup='listbox'
 								aria-expanded={isLanguageMenuOpen}>
@@ -176,7 +176,7 @@ const Header = () => {
 								{isLanguageMenuOpen && (
 									<motion.div role='listbox' aria-label='Available languages' className='absolute right-0 z-50 mt-2 min-w-40 overflow-hidden rounded-xl border border-forest-800/15 bg-cream-50 p-1 shadow-xl' initial={{ opacity: 0, y: -8, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.96 }} transition={{ duration: 0.15 }}>
 										{LANGUAGES?.map((option, idx: number) => (
-											<button key={idx} type='button' onClick={() => selectLanguage(option)} className='w-full px-3 py-2 flex items-center justify-between rounded-lg text-left text-sm font-semibold text-forest-800 hover:bg-cream-200' role='option' aria-selected={language === option.label}>
+											<button key={idx} type='button' onClick={() => selectLanguage(option)} className='w-full px-3 py-2 flex items-center justify-between rounded-xl text-left text-sm font-semibold text-forest-800 hover:bg-cream-200' role='option' aria-selected={language === option.label}>
 												{option.label}
 												{language === option.label && <span aria-hidden='true'>✓</span>}
 											</button>
