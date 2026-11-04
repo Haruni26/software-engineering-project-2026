@@ -115,7 +115,7 @@ const Header = () => {
 								<NavLink key={idx} to={navLink?.to} className={({ isActive }) => cn('nav-link relative', isActive && 'active')}>
 									{({ isActive }) => (
 										<>
-											{isActive && <motion.span layoutId='active-nav-link' className='absolute inset-0 rounded-xl bg-forest-800' transition={{ type: 'spring', stiffness: 500, damping: 35 }} />}
+											{isActive && <motion.span layoutId='active-nav-link' className='absolute inset-0 rounded-xl bg-forest-700' transition={{ type: 'spring', stiffness: 500, damping: 35 }} />}
 											<span className='relative z-10'>{navLink?.label}</span>
 										</>
 									)}

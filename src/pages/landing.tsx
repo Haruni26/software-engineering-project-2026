@@ -149,16 +149,16 @@ const LandingPage = () => {
 
 					<p className='max-w-xl mt-5 font-semibold text-white/90 text-base sm:text-lg md:text-xl leading-relaxed'>Step into the wonders of Woodland Conservation Area. Discover talking trees, curious wildlife, and the natural beauty of St. Margaret&apos;s Bay.</p>
 
-					<div className='mt-8 flex flex-wrap items-center justify-center gap-3'>
-						<Link to='/explore' className='group inline-flex min-h-13 items-center justify-center gap-3 rounded-full bg-forest-700 px-7 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(5,70,51,.25)] transition-all duration-300 hover:-translate-y-1 hover:bg-forest-600'>
+					<div className='mt-8 flex flex-wrap items-center justify-center gap-4'>
+						<Link to='/explore' className='btn btn-primary min-h-13 hover:-translate-y-1'>
 							Start Exploring
-							<ArrowRight size={20} className='transition-transform group-hover:translate-x-1' />
+							<ArrowRight className='size-5 shrink-0 transition-all' />
 						</Link>
 
-						<a href='#visit' className='inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-forest-500/15 bg-cream-50/90 px-6 py-3.5 text-base font-bold text-sage-700 shadow-sm backdrop-blur-md transition hover:-translate-y-1 hover:bg-white'>
-							<Compass size={19} />
+						<Link to='/visit' className='btn btn-secondary min-h-13 hover:-translate-y-1'>
+							<Compass className='size-5 shrink-0' />
 							Plan Your Visit
-						</a>
+						</Link>
 					</div>
 				</div>
 			</section>
