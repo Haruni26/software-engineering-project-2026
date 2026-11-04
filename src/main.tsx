@@ -1,6 +1,7 @@
 import '@/assets/css/index.css';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
+import { ScrollToTop } from '@/components/scroll-to-top';
 import { ThemeProvider } from '@/context/theme-context';
 import { LandingPage } from '@/pages/landing';
 import { StrictMode } from 'react';
@@ -33,6 +34,7 @@ createRoot(root!).render(
 				</Routes>
 
 				<Footer />
+				<ScrollToTop />
 			</Router>
 		</ThemeProvider>
 	</StrictMode>,

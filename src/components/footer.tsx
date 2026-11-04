@@ -1,7 +1,6 @@
 import TreesImage from '@/assets/img/trees.png';
-import { ArrowUp, ArrowUpRight, MapPin } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
-import { type CSSProperties, useEffect, useState } from 'react';
+import { ArrowUpRight, MapPin } from 'lucide-react';
+import { type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 
 type TreeStyle = CSSProperties & {
@@ -31,25 +30,6 @@ const footerLinks = {
 
 const Footer = () => {
 	const currentYear = new Date().getFullYear();
-	const [showScrollToTop, setShowScrollToTop] = useState(false);
-
-	useEffect(() => {
-		const handleScroll = () => {
-			setShowScrollToTop(window.scrollY > 240);
-		};
-
-		handleScroll();
-		window.addEventListener('scroll', handleScroll, { passive: true });
-
-		return () => window.removeEventListener('scroll', handleScroll);
-	}, []);
-
-	const scrollToTop = () => {
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth',
-		});
-	};
 
 	return (
 		<footer className='relative bg-forest-900 text-cream-300 overflow-hidden selection:bg-sage-200! selection:text-forest-900!'>
@@ -158,28 +138,6 @@ const Footer = () => {
 				))}
 			</div>
 
-			<AnimatePresence>
-				{showScrollToTop && (
-					<motion.button
-						//
-						type='button'
-						onClick={scrollToTop}
-						className='btn btn-primary fixed right-6 bottom-6 z-50 size-11 rounded-full border border-white/20 p-0! shadow-lg'
-						aria-label='Back to top'
-						initial={{ opacity: 0, scale: 0.8, y: 16 }}
-						animate={{ opacity: 1, scale: 1, y: 0 }}
-						exit={{ opacity: 0, scale: 0.8, y: 16 }}
-						transition={{ duration: 0.2, ease: 'easeOut' }}>
-						<ArrowUp size={18} />
-					</motion.button>
-
-					//       <button type='button' onClick={toggleSpeech} className={`size-10 inline-flex items-center justify-center shrink-0 rounded-full border-2 border-forest-700 bg-white/90 text-forest-700 shadow-sm hover:scale-105 ${className}`} title={isPlaying ? 'Stop reading' : 'Read aloud'} aria-label={isPlaying ? 'Stop reading' : `Read aloud: ${text}`} aria-pressed={isPlaying}>
-					// 	<motion.span animate={{ scale: isPlaying ? [1, 1.12, 1] : 1 }} transition={{ duration: 0.8, repeat: isPlaying ? Infinity : 0 }}>
-					// 		{isPlaying ? <Pause size={18} strokeWidth={2.6} /> : <Volume2 size={20} strokeWidth={2.6} />}
-					// 	</motion.span>
-					// </button>
-				)}
-			</AnimatePresence>
 		</footer>
 	);
 };
