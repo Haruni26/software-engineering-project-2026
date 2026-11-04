@@ -6,6 +6,7 @@ import NatureMatchingImage from '@/assets/img/nature-matching.png';
 import RaccoonImage from '@/assets/img/raccoon.png';
 import TrailsImage from '@/assets/img/trails.png';
 import TreesImage from '@/assets/img/trees.png';
+import { AudioButton } from '@/components/audio-button';
 import { type CardType } from '@/components/card';
 import { ArrowRight, Compass, Leaf, TreePine, Volume2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
@@ -81,14 +82,6 @@ const kidsCards: CardType[] = [
 	},
 ];
 
-function AudioButton({ text, className = '' }: { text: string; className?: string }) {
-	return (
-		<button type='button' onClick={() => say(text)} title='Read aloud' aria-label={`Read aloud: ${text}`} className={`inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-white/80 bg-white/90 text-forest-700 shadow-sm transition hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 ${className}`}>
-			<Volume2 size={20} strokeWidth={2.6} />
-		</button>
-	);
-}
-
 const LandingPage = () => {
 	const heroRef = useRef<HTMLElement>(null);
 	const backgroundRef = useRef<HTMLImageElement>(null);
@@ -102,11 +95,20 @@ const LandingPage = () => {
 		}
 
 		let frame = 0;
+		const isMobile = window.matchMedia('(max-width: 767px)').matches;
+		const zoomAmount = isMobile ? 0.015 : 0.08;
+		const smoothing = isMobile ? 0.04 : 0.1;
+		let currentProgress = 0;
 
 		const updateParallax = () => {
 			frame = 0;
 			const progress = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / hero.offsetHeight));
-			background.style.transform = `translate3d(0, ${progress * 48}px, 0) scale(${1.08 + progress * 0.08})`;
+			currentProgress += (progress - currentProgress) * smoothing;
+			background.style.transform = `translate3d(0, ${currentProgress * 48}px, 0) scale(${1.08 + currentProgress * zoomAmount})`;
+
+			if (Math.abs(progress - currentProgress) > 0.001) {
+				frame = requestAnimationFrame(updateParallax);
+			}
 		};
 
 		const handleScroll = () => {
@@ -131,8 +133,8 @@ const LandingPage = () => {
 	}, []);
 
 	return (
-		<main className='min-h-screen flex flex-col gap-20'>
-			<section ref={heroRef} className='relative isolate min-h-[calc(100dvh-5rem)] flex items-center overflow-hidden bg-mist-300'>
+		<main className='min-h-screen mt-22 flex flex-col gap-20'>
+			<section ref={heroRef} className='relative isolate min-h-[calc(100dvh-5.5rem)] flex items-center overflow-hidden bg-mist-300'>
 				<img ref={backgroundRef} className='absolute inset-0 -z-30 select-none size-full origin-center object-cover object-center will-change-transform' src={BackgroundImage} alt="Illustrated woodland overlooking St. Margaret's Bay with a deer, evergreen trees, and a young explorer" />
 				<div className='absolute inset-0 -z-20 select-none bg-black/30' aria-hidden='true' />
 
@@ -141,7 +143,7 @@ const LandingPage = () => {
 						<Leaf className='size-5 shrink-0 fill-sage-500' />A world of nature awaits
 					</div>
 
-					<h1 className='max-w-4xl font-bold text-8xl text-white tracking-tight leading-[1.04]'>
+					<h1 className='max-w-4xl font-bold text-5xl md:text-8xl text-white tracking-tight leading-[1.04]'>
 						Explore. Learn.
 						<br />
 						Protect.
@@ -149,13 +151,13 @@ const LandingPage = () => {
 
 					<p className='max-w-xl mt-5 font-semibold text-white/90 text-base sm:text-lg md:text-xl leading-relaxed'>Step into the wonders of Woodland Conservation Area. Discover talking trees, curious wildlife, and the natural beauty of St. Margaret&apos;s Bay.</p>
 
-					<div className='mt-8 flex flex-wrap items-center justify-center gap-4'>
-						<Link to='/explore' className='btn btn-primary min-h-13 hover:-translate-y-1'>
+					<div className='w-full mt-8 flex flex-col md:flex-row items-center justify-center gap-4'>
+						<Link to='/explore' className='btn btn-primary min-h-13 w-full md:w-auto hover:-translate-y-1'>
 							Start Exploring
 							<ArrowRight className='size-5 shrink-0 transition-all' />
 						</Link>
 
-						<Link to='/visit' className='btn btn-secondary min-h-13 hover:-translate-y-1'>
+						<Link to='/visit' className='btn btn-secondary min-h-13 w-full md:w-auto hover:-translate-y-1'>
 							<Compass className='size-5 shrink-0' />
 							Plan Your Visit
 						</Link>
@@ -164,7 +166,7 @@ const LandingPage = () => {
 			</section>
 
 			<section className='relative z-10 w-full px-4 sm:px-8 lg:px-12'>
-				<div className='max-w-360 mx-auto p-3 sm:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 rounded-[28px] bg-cream-200 dark:bg-forest-800 shadow-xl overflow-hidden'>
+				<div className='max-w-360 mx-auto p-3 sm:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 rounded-[28px] bg-forest-800 dark:bg-cream-300 shadow-xl overflow-hidden'>
 					{featureCards?.map((card: CardType, idx: number) => {
 						return <Card key={idx} {...card} />;
 					})}
@@ -269,12 +271,12 @@ const LandingPage = () => {
 					<img className='h-20 w-auto shrink-0 transition-all duration-300 hover:scale-105' src={KidImage} alt='Kid' />
 
 					<div>
-						<h2 className='font-black text-4xl'>Kids Zone</h2>
-						<p>Play, learn and explore the forest!</p>
+						<h2 className='font-black text-4xl text-forest-800 dark:text-cream-300 nunito'>Kids Zone</h2>
+						<p className='text-neutral-600 dark:text-neutral-200'>Play, learn and explore the forest!</p>
 					</div>
 				</div>
 
-				<div className='max-w-360 mx-auto p-3 sm:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 rounded-[28px] bg-cream-200 dark:bg-forest-800 shadow-xl overflow-hidden'>
+				<div className='max-w-360 mx-auto p-3 sm:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 rounded-[28px] bg-forest-800 dark:bg-cream-300 shadow-xl overflow-hidden'>
 					{kidsCards?.map((card: CardType, idx: number) => {
 						return <Card key={idx} {...card} />;
 					})}

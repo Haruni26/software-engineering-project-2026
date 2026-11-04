@@ -1,6 +1,7 @@
 import TreeIcon from '@/assets/img/tree-icon.png';
+import { useTheme } from '@/context/theme-context';
 import { cn } from '@/lib';
-import { ChevronDown, Globe2, Moon, Sun, Volume2, VolumeX } from 'lucide-react';
+import { ChevronDown, Globe2, Moon, Sun, SunMoon, Volume2, VolumeX } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
@@ -27,11 +28,11 @@ const LANGUAGES = [
 ] as const;
 
 const Header = () => {
+	const { cycleTheme, isDarkMode, theme } = useTheme();
 	const languageMenuRef = useRef<HTMLDivElement>(null);
 
 	const [language, setLanguage] = useState<(typeof LANGUAGES)[number]['label']>('English');
 	const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState<boolean>(false);
-	const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 	const [isMuted, setIsMuted] = useState<boolean>(false);
 	const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
@@ -39,10 +40,6 @@ const Header = () => {
 		setLanguage(selectedLanguage.label);
 		setIsLanguageMenuOpen(false);
 	};
-
-	useEffect(() => {
-		document.documentElement.classList.toggle('dark', isDarkMode);
-	}, [isDarkMode]);
 
 	useEffect(() => {
 		document.body.style.overflow = isNavOpen ? 'hidden' : '';
@@ -80,15 +77,15 @@ const Header = () => {
 	}, []);
 
 	return (
-		<header className={`${isNavOpen ? 'min-h-dvh overflow-hidden' : 'min-h-20'} z-50 w-full flex flex-wrap md:min-h-20 md:flex-nowrap md:justify-start border-b-2 border-forest-800 bg-cream-300`}>
+		<header className={`fixed top-0 ${isNavOpen ? 'min-h-dvh overflow-hidden' : 'h-22'} z-50 w-full flex flex-wrap md:min-h-20 md:flex-nowrap items-center md:justify-start border-b-2 border-forest-800 dark:border-forest-800 bg-cream-300 dark:bg-forest-800`}>
 			<nav className={`${isNavOpen ? 'min-h-dvh overflow-hidden' : ''} relative w-full max-w-340 mx-auto flex flex-col py-2 px-4 sm:px-6 lg:px-8 md:min-h-20 md:flex-row md:items-center md:justify-between md:gap-3`}>
 				<div className='flex items-center justify-between gap-x-1'>
 					<Link to='/' className='select-none flex flex-row items-center justify-start gap-2 shrink-0' aria-label='Woodland Conservation Area'>
 						<img className='h-auto w-14 shrink-0' src={TreeIcon} alt='Tree' />
 
 						<div className='flex flex-col items-start justify-center'>
-							<span className='font-semibold text-xl! text-forest-800 nunito'>Woodland Conservation Area</span>
-							<p className='-mt-1 font-medium text-sm! text-neutral-600 nunito'>St. Margaret's Bay, Nova Scotia</p>
+							<span className='font-semibold text-xl! text-forest-800 dark:text-cream-300 nunito'>Woodland Conservation Area</span>
+							<p className='-mt-1 font-medium text-sm! text-neutral-600 dark:text-neutral-200 nunito'>St. Margaret's Bay, Nova Scotia</p>
 						</div>
 					</Link>
 
@@ -104,6 +101,7 @@ const Header = () => {
 							<motion.line animate={{ opacity: isNavOpen ? 0 : 1, x1: 3, x2: 21, y1: 12, y2: 12 }} transition={{ duration: 0.15 }} />
 							<motion.line animate={{ x1: isNavOpen ? 6 : 3, x2: isNavOpen ? 18 : 21, y1: isNavOpen ? 18 : 18, y2: isNavOpen ? 6 : 18 }} transition={{ duration: 0.25 }} />
 						</svg>
+
 						<span className='sr-only'>Toggle navigation</span>
 					</button>
 				</div>
@@ -162,12 +160,12 @@ const Header = () => {
 						</div>
 
 						<div className='flex items-center gap-2'>
-							<motion.button type='button' onClick={() => setIsDarkMode((current) => !current)} aria-label={isDarkMode ? 'Use light theme' : 'Use dark theme'} aria-pressed={isDarkMode} className='btn btn-primary btn-icon min-h-10' whileTap={{ scale: 0.9 }}>
-								<motion.span animate={{ rotate: isDarkMode ? 0 : 180 }} transition={{ duration: 0.3 }}>
-									{isDarkMode ? <Moon className='size-5 shrink-0 text-blue-500' /> : <Sun className='size-5 shrink-0 text-yellow-500' />}
+							<motion.button type='button' onClick={cycleTheme} aria-label={`Theme: ${theme}. Switch to ${theme === 'system' ? 'light' : theme === 'light' ? 'dark' : 'system'} theme`} aria-pressed={theme === 'dark'} className='btn btn-primary btn-icon min-h-10' whileTap={{ scale: 0.9 }}>
+								<motion.span animate={{ rotate: theme === 'system' ? 0 : isDarkMode ? 0 : 360 }} transition={{ duration: 0.3 }}>
+									{theme === 'system' ? <SunMoon className='size-5 shrink-0 text-white' /> : isDarkMode ? <Moon className='size-5 shrink-0 text-blue-500' /> : <Sun className='size-5 shrink-0 text-yellow-500' />}
 								</motion.span>
 
-								<span className='sr-only'>{isDarkMode ? 'Light theme' : 'Dark theme'}</span>
+								<span className='sr-only'>{theme} theme</span>
 							</motion.button>
 
 							<motion.button type='button' onClick={() => setIsMuted((current) => !current)} aria-label={isMuted ? 'Unmute audio' : 'Mute audio'} aria-pressed={isMuted} className='btn btn-primary btn-icon min-h-10' whileTap={{ scale: 0.9 }}>
