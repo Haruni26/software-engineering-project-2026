@@ -137,17 +137,17 @@ const LandingPage = () => {
 				<div className='absolute inset-0 -z-20 select-none bg-black/30' aria-hidden='true' />
 
 				<div className='relative z-10 w-full max-w-7xl mx-auto -mt-20 px-5 pt-12 sm:pt-16 lg:pt-20 flex flex-col items-center text-center'>
-					<div className='select-none mb-5 px-4 py-2 inline-flex items-center gap-2 rounded-full border border-forest-500/15 bg-cream-50/90 font-bold text-xs sm:text-sm text-forest-500 uppercase'>
+					<div className='mb-5 px-4 py-2 inline-flex items-center gap-2 rounded-full border border-forest-500/15 bg-cream-50/90 font-bold text-xs sm:text-sm text-forest-500 uppercase'>
 						<Leaf className='size-5 shrink-0 fill-sage-500' />A world of nature awaits
 					</div>
 
-					<h1 className='max-w-4xl font-bold text-8xl text-forest-800 tracking-tight leading-[1.04] drop-shadow-[0_2px_1px_rgba(255,255,255,0.4)]'>
+					<h1 className='max-w-4xl font-bold text-8xl text-white tracking-tight leading-[1.04]'>
 						Explore. Learn.
 						<br />
-						<span className='text-sage-500'>Protect.</span>
+						Protect.
 					</h1>
 
-					<p className='mt-5 max-w-xl font-semibold text-white/80 text-base sm:text-lg md:text-xl leading-relaxed'>Step into the wonders of Woodland Conservation Area. Discover talking trees, curious wildlife, and the natural beauty of St. Margaret&apos;s Bay.</p>
+					<p className='max-w-xl mt-5 font-semibold text-white/90 text-base sm:text-lg md:text-xl leading-relaxed'>Step into the wonders of Woodland Conservation Area. Discover talking trees, curious wildlife, and the natural beauty of St. Margaret&apos;s Bay.</p>
 
 					<div className='mt-8 flex flex-wrap items-center justify-center gap-3'>
 						<Link to='/explore' className='group inline-flex min-h-13 items-center justify-center gap-3 rounded-full bg-forest-700 px-7 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(5,70,51,.25)] transition-all duration-300 hover:-translate-y-1 hover:bg-forest-600'>
