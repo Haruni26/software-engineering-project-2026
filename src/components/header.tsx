@@ -42,9 +42,19 @@ const Header = () => {
 	};
 
 	useEffect(() => {
-		document.body.style.overflow = isNavOpen ? 'hidden' : '';
+		if (!isNavOpen) return;
+
+		const desktop = window.matchMedia('(min-width: 80rem)');
+		const closeOnDesktop = () => {
+			if (desktop.matches) setIsNavOpen(false);
+		};
+
+		closeOnDesktop();
+		desktop.addEventListener('change', closeOnDesktop);
+		document.body.style.overflow = 'hidden';
 
 		return () => {
+			desktop.removeEventListener('change', closeOnDesktop);
 			document.body.style.overflow = '';
 		};
 	}, [isNavOpen]);
@@ -77,9 +87,9 @@ const Header = () => {
 	}, []);
 
 	return (
-		<header className={cn('fixed top-0 z-50 w-full flex flex-wrap md:min-h-22 md:flex-nowrap md:items-center md:justify-start shrink-0 border-b-2 border-forest-800 dark:border-cream-300 bg-cream-300 dark:bg-forest-800', isNavOpen ? 'min-h-dvh overflow-hidden items-start' : 'h-22 items-center')}>
-			<nav className={cn('relative h-22 w-full max-w-340 md:min-h-22 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:justify-between md:gap-3', isNavOpen && 'min-h-dvh overflow-hidden')}>
-				<div className='h-22! w-full flex items-center justify-between shrink-0 gap-x-1'>
+		<header className={cn('fixed top-0 z-50 w-full flex flex-wrap xl:min-h-22 xl:flex-nowrap xl:items-center xl:justify-start shrink-0 border-b-2 border-forest-800 dark:border-cream-300 bg-cream-300 dark:bg-forest-800', isNavOpen ? 'min-h-dvh overflow-hidden items-start' : 'h-22 items-center')}>
+			<nav className={cn('relative h-22 w-full max-w-340 xl:min-h-22 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col xl:flex-row xl:justify-between xl:gap-3', isNavOpen && 'min-h-dvh overflow-hidden')}>
+				<div className='h-22! w-full xl:w-auto flex items-center justify-between shrink-0 gap-x-1'>
 					<Link to='/' className='select-none flex flex-row items-center justify-start gap-2 shrink-0' aria-label='Woodland Conservation Area'>
 						<img className='h-auto w-14 shrink-0' src={TreeIcon} alt='Tree' />
 
@@ -92,7 +102,7 @@ const Header = () => {
 					<button
 						type='button'
 						onClick={() => setIsNavOpen((current) => !current)}
-						className='md:hidden relative size-10 flex justify-center items-center rounded-xl bg-forest-800 text-white hover:bg-forest-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-800'
+						className='xl:hidden relative size-10 flex justify-center items-center rounded-xl bg-forest-800 dark:bg-cream-300 hover:bg-forest-700 dark:hover:bg-cream-400 text-white dark:text-green-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-800'
 						aria-expanded={isNavOpen}
 						aria-controls='site-navigation'
 						aria-label={isNavOpen ? 'Close navigation' : 'Open navigation'}>
@@ -108,8 +118,8 @@ const Header = () => {
 
 				<div
 					id='site-navigation'
-					className={cn('w-full md:w-auto py-2 md:py-0 md:flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1 overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out md:max-h-none md:opacity-100', isNavOpen ? 'flex min-h-[calc(100dvh-5.5rem)] max-h-[calc(100dvh-5.5rem)] opacity-100' : 'max-h-0 opacity-0 pointer-events-none md:pointer-events-auto')}>
-					<div className='flex w-full flex-1 flex-col justify-start gap-0.5 md:w-auto md:flex-none md:flex-row md:items-center md:justify-end md:gap-1'>
+					className={cn('w-full xl:w-auto py-2 xl:py-0 flex flex-col xl:flex-row xl:items-center gap-0.5 xl:gap-1 max-xl:overflow-hidden max-xl:transition-[max-height,opacity,visibility] duration-300 ease-in-out', isNavOpen ? 'max-xl:min-h-[calc(100dvh-5.5rem)] max-xl:max-h-[calc(100dvh-5.5rem)]' : 'max-xl:max-h-0 max-xl:invisible max-xl:opacity-0')}>
+					<div className='flex w-full flex-1 flex-col justify-start gap-0.5 xl:w-auto xl:flex-none xl:flex-row xl:items-center xl:justify-end xl:gap-1'>
 						{NAV_LINKS?.map((navLink: NavLinkType, idx: number) => {
 							return (
 								<NavLink key={idx} to={navLink?.to} onClick={() => setIsNavOpen(false)} className={({ isActive }) => cn('nav-link relative', isActive && 'active')}>
@@ -124,11 +134,11 @@ const Header = () => {
 						})}
 					</div>
 
-					<div className='my-2 md:my-0 md:ml-2 md:mr-4'>
-						<div className='select-none h-px md:h-4 w-full md:border-s border-forest-800'></div>
+					<div className='my-2 xl:my-0 xl:ml-2 xl:mr-4'>
+						<div className='select-none h-px xl:h-4 w-full xl:border-s border-forest-800'></div>
 					</div>
 
-					<div className='w-full md:w-auto mb-10 md:mb-0 md:mt-0 flex items-center justify-between md:justify-end gap-2'>
+					<div className='w-full xl:w-auto mb-10 xl:mb-0 xl:mt-0 flex items-center justify-between xl:justify-end gap-2'>
 						<div ref={languageMenuRef} className='relative'>
 							<button
 								type='button'

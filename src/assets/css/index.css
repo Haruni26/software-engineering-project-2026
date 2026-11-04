@@ -89,9 +89,9 @@ button {
 }
 
 .nav-link {
-	@apply min-h-10 w-full md:w-auto
+	@apply min-h-10 w-full xl:w-auto
     px-3 py-1.5
-    inline-flex items-center justify-between md:justify-center
+    inline-flex items-center justify-between xl:justify-center
     font-semibold text-base text-neutral-900 hover:text-forest-700 focus:text-forest-700 active:text-forest-700
     dark:text-neutral-200 dark:hover:text-cream-300 dark:focus:text-neutral-200 dark:active:text-neutral-200
     rounded-xl;
