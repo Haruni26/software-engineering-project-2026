@@ -6,10 +6,10 @@ import NatureMatchingImage from '@/assets/img/nature-matching.png';
 import RaccoonImage from '@/assets/img/raccoon.png';
 import TrailsImage from '@/assets/img/trails.png';
 import TreesImage from '@/assets/img/trees.png';
-import { AudioButton, Card, type CardType } from '@/components';
+import { AudioButton, Button, Card } from '@/components';
+import type { CardType } from '@/types';
 import { ArrowRight, Compass, Leaf, TreePine, Volume2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 
 const lakePhoto = 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1100&q=85';
 
@@ -166,15 +166,15 @@ const LandingPage = () => {
 					<p className='max-w-xl mt-5 font-semibold text-white/90 text-base sm:text-lg md:text-xl leading-relaxed'>Step into the wonders of Woodland Conservation Area. Discover talking trees, curious wildlife, and the natural beauty of St. Margaret&apos;s Bay.</p>
 
 					<div className='w-full mt-8 flex flex-col md:flex-row items-center justify-center gap-4'>
-						<Link to='/explore' className='btn btn-primary min-h-13 w-full md:w-auto hover:-translate-y-1'>
+						<Button to='/explore' variant='primary' size='xl' radius='lg' fullWidth={false} className='w-full md:w-auto hover:-translate-y-1'>
 							Start Exploring
 							<ArrowRight className='size-5 shrink-0 transition-all' />
-						</Link>
+						</Button>
 
-						<Link to='/visit' className='btn btn-secondary min-h-13 w-full md:w-auto hover:-translate-y-1'>
+						<Button to='/visit' variant='secondary' size='xl' radius='lg' fullWidth={false} className='w-full md:w-auto hover:-translate-y-1'>
 							<Compass className='size-5 shrink-0' />
 							Plan Your Visit
-						</Link>
+						</Button>
 					</div>
 				</div>
 			</section>

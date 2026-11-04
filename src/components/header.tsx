@@ -1,15 +1,11 @@
 import TreeIcon from '@/assets/img/tree-icon.png';
 import { useTheme } from '@/context';
 import { cn } from '@/lib';
+import type { NavLinkType } from '@/types';
 import { ChevronDown, Globe2, Moon, Sun, SunMoon, Volume2, VolumeX } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
-type NavLinkType = {
-	to: string;
-	label: string;
-};
 
 const NAV_LINKS: NavLinkType[] = [
 	{ to: '/', label: 'Home' },

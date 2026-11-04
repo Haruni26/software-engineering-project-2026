@@ -1,17 +1,10 @@
+import type { ThemeContextValueType, ThemeType } from '@/types';
 import { createContext, useContext, useEffect, useState, type FC, type PropsWithChildren } from 'react';
-
-type Theme = 'light' | 'dark' | 'system';
-
-type ThemeContextValueType = {
-	theme: Theme;
-	isDarkMode: boolean;
-	cycleTheme: () => void;
-};
 
 const ThemeContext = createContext<ThemeContextValueType | undefined>(undefined);
 
 const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
-	const [theme, setTheme] = useState<Theme>(() => {
+	const [theme, setTheme] = useState<ThemeType>(() => {
 		if (typeof window === 'undefined') {
 			return 'system';
 		}
@@ -65,4 +58,3 @@ const useTheme = () => {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export { ThemeProvider, useTheme };
-export type { Theme };

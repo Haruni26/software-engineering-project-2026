@@ -1,11 +1,7 @@
 import TreesImage from '@/assets/img/trees.png';
+import type { TreeStyleType } from '@/types';
 import { ArrowUpRight, MapPin } from 'lucide-react';
-import { type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
-
-type TreeStyle = CSSProperties & {
-	'--tree-rotation': string;
-};
 
 const footerLinks = {
 	Explore: [
@@ -83,7 +79,7 @@ const Footer = () => {
 							Accessibility
 						</Link>
 
-						<Link to='/' className='hover:text-white'>
+						<Link to='/contact' className='hover:text-white'>
 							Contact
 						</Link>
 					</div>
@@ -124,7 +120,7 @@ const Footer = () => {
 						{Array.from({ length: layer.count }).map((_, idx) => {
 							const height = 55 + ((idx * 19 + layerIndex * 13) % 55);
 							const rotation = ((idx * 7 + layerIndex * 3) % 13) - 6;
-							const treeStyle: TreeStyle = {
+							const treeStyle: TreeStyleType = {
 								height: `${height * layer.scale}%`,
 								marginLeft: idx === 0 ? 0 : '-2%',
 								'--tree-rotation': `${rotation}deg`,
@@ -137,7 +133,6 @@ const Footer = () => {
 					</div>
 				))}
 			</div>
-
 		</footer>
 	);
 };

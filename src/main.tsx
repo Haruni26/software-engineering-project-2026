@@ -1,7 +1,7 @@
 import '@/assets/css/index.css';
 import { Footer, Header, ScrollToTop } from '@/components';
 import { ThemeProvider } from '@/context';
-import { AboutPage, AnimalsPage, ExplorePage, LandingPage, TreesPage } from '@/pages';
+import { AboutPage, AnimalsPage, ContactPage, ExplorePage, LandingPage, TreesPage } from '@/pages';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
@@ -26,7 +26,7 @@ createRoot(root!).render(
 					<Route path='/kids/animal-quiz' element={<LandingPage />} />
 					<Route path='/about' element={<AboutPage />} />
 					<Route path='/conservation' element={<LandingPage />} />
-					<Route path='/contact' element={<LandingPage />} />
+					<Route path='/contact' element={<ContactPage />} />
 					<Route path='/legal/privacy' element={<LandingPage />} />
 					<Route path='/legal/accessibility' element={<LandingPage />} />
 				</Routes>

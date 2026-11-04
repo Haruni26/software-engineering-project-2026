@@ -1,13 +1,7 @@
+import type { CardType } from '@/types';
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { AudioButton } from './audio-button';
-
-type CardType = {
-	title: string;
-	desc: string;
-	to: string;
-	image: string;
-};
 
 const Card: FC<CardType> = ({ title, desc, to, image }) => {
 	return (
@@ -32,4 +26,4 @@ const Card: FC<CardType> = ({ title, desc, to, image }) => {
 	);
 };
 
-export { Card, type CardType };
+export { Card };
