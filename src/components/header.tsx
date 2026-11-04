@@ -77,9 +77,9 @@ const Header = () => {
 	}, []);
 
 	return (
-		<header className={cn('fixed top-0 z-50 w-full flex flex-wrap md:min-h-22 md:flex-nowrap items-center md:justify-start shrink-0 border-b-2 border-forest-800 dark:border-cream-300 bg-cream-300 dark:bg-forest-800', isNavOpen ? 'min-h-dvh overflow-hidden' : 'h-22')}>
-			<nav className={cn('relative size-full max-w-340 md:min-h-22 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center md:justify-between md:gap-3', isNavOpen && 'min-h-dvh overflow-hidden')}>
-				<div className='h-22 flex items-center justify-between gap-x-1'>
+		<header className={cn('fixed top-0 z-50 w-full flex flex-wrap md:min-h-22 md:flex-nowrap items-start md:items-center md:justify-start shrink-0 border-b-2 border-forest-800 dark:border-cream-300 bg-cream-300 dark:bg-forest-800', isNavOpen ? 'min-h-dvh overflow-hidden' : 'h-22')}>
+			<nav className={cn('relative h-22 w-full max-w-340 md:min-h-22 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center md:justify-between md:gap-3', isNavOpen && 'min-h-dvh overflow-hidden')}>
+				<div className='h-22 w-full flex items-center justify-between gap-x-1'>
 					<Link to='/' className='select-none flex flex-row items-center justify-start gap-2 shrink-0' aria-label='Woodland Conservation Area'>
 						<img className='h-auto w-14 shrink-0' src={TreeIcon} alt='Tree' />
 
