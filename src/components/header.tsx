@@ -34,12 +34,22 @@ const Header = () => {
 	const [language, setLanguage] = useState<(typeof LANGUAGES)[number]['label']>('English');
 	const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState<boolean>(false);
 	const [isMuted, setIsMuted] = useState<boolean>(false);
+	const [hasScrolled, setHasScrolled] = useState(() => window.scrollY > 0);
 	const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
 	const selectLanguage = (selectedLanguage: (typeof LANGUAGES)[number]) => {
 		setLanguage(selectedLanguage.label);
 		setIsLanguageMenuOpen(false);
 	};
+
+	useEffect(() => {
+		const handleScroll = () => setHasScrolled(window.scrollY > 0);
+
+		handleScroll();
+		window.addEventListener('scroll', handleScroll, { passive: true });
+
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
 
 	useEffect(() => {
 		if (!isNavOpen) {
@@ -93,7 +103,7 @@ const Header = () => {
 	}, []);
 
 	return (
-		<motion.header layoutRoot className={cn('fixed top-0 z-50 w-full flex flex-wrap xl:min-h-22 xl:flex-nowrap xl:items-center xl:justify-start shrink-0 border-b-2 border-forest-800 dark:border-cream-300 bg-cream-300 dark:bg-forest-800', isNavOpen ? 'min-h-dvh overflow-hidden items-start' : 'h-22 items-center')}>
+		<motion.header layoutRoot className={cn('fixed top-0 z-50 w-full flex flex-wrap xl:min-h-22 xl:flex-nowrap xl:items-center xl:justify-start shrink-0 border-b-2 bg-cream-300 dark:bg-forest-800', hasScrolled ? 'border-forest-800 dark:border-cream-300' : 'border-transparent', isNavOpen ? 'min-h-dvh overflow-hidden items-start' : 'h-22 items-center')}>
 			<nav className={cn('relative h-22 w-full max-w-340 xl:min-h-22 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col xl:flex-row xl:justify-between xl:gap-3', isNavOpen && 'min-h-dvh overflow-hidden')}>
 				<div className='h-22! w-full xl:w-auto flex items-center justify-between shrink-0 gap-x-1'>
 					<Link to='/' className='select-none flex flex-row items-center justify-start gap-2 shrink-0' aria-label='Woodland Conservation Area'>
