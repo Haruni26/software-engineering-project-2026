@@ -106,7 +106,6 @@ const Footer = () => {
 						<Link to='/' className='hover:text-white'>
 							Contact
 						</Link>
-
 					</div>
 				</div>
 			</div>
@@ -153,17 +152,7 @@ const Footer = () => {
 								animationDelay: `${(idx + layerIndex * 3) * 0.12}s`,
 							};
 
-							return (
-								<img
-									key={idx}
-									src={TreesImage}
-									alt=''
-									aria-hidden='true'
-									draggable={false}
-									className='tree-sway relative min-w-0 flex-1 object-contain object-bottom'
-									style={treeStyle}
-								/>
-							);
+							return <img key={idx} src={TreesImage} alt='' aria-hidden='true' draggable={false} className='tree-sway relative min-w-0 flex-1 object-contain object-bottom' style={treeStyle} />;
 						})}
 					</div>
 				))}
@@ -172,6 +161,7 @@ const Footer = () => {
 			<AnimatePresence>
 				{showScrollToTop && (
 					<motion.button
+						//
 						type='button'
 						onClick={scrollToTop}
 						className='btn btn-primary fixed right-6 bottom-6 z-50 size-11 rounded-full border border-white/20 p-0! shadow-lg'
@@ -182,6 +172,12 @@ const Footer = () => {
 						transition={{ duration: 0.2, ease: 'easeOut' }}>
 						<ArrowUp size={18} />
 					</motion.button>
+
+					//       <button type='button' onClick={toggleSpeech} className={`size-10 inline-flex items-center justify-center shrink-0 rounded-full border-2 border-forest-700 bg-white/90 text-forest-700 shadow-sm hover:scale-105 ${className}`} title={isPlaying ? 'Stop reading' : 'Read aloud'} aria-label={isPlaying ? 'Stop reading' : `Read aloud: ${text}`} aria-pressed={isPlaying}>
+					// 	<motion.span animate={{ scale: isPlaying ? [1, 1.12, 1] : 1 }} transition={{ duration: 0.8, repeat: isPlaying ? Infinity : 0 }}>
+					// 		{isPlaying ? <Pause size={18} strokeWidth={2.6} /> : <Volume2 size={20} strokeWidth={2.6} />}
+					// 	</motion.span>
+					// </button>
 				)}
 			</AnimatePresence>
 		</footer>
