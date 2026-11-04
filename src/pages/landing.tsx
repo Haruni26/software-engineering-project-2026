@@ -233,16 +233,17 @@ const LandingPage = () => {
 			</section>
 
 			<section className='relative z-10 w-full px-4 sm:px-8 lg:px-12'>
-				<div className='mx-auto grid max-w-360 overflow-hidden rounded-4xl bg-sage-200 shadow-xl lg:grid-cols-[.9fr_1.1fr]'>
-					<div className='relative flex min-h-80 items-end overflow-hidden bg-linear-to-b from-mist-200 to-mist-100 p-6 sm:p-10'>
-						<img src={TreesImage} alt='Illustration of a red maple tree' className='absolute inset-x-0 bottom-0 mx-auto h-[92%] w-full object-contain object-bottom transition-transform duration-700 hover:scale-105' />
-						<div className='relative z-10 max-w-xs rounded-2xl bg-cream-50/90 p-4 text-sm font-bold text-forest-900 shadow-lg backdrop-blur-sm'>
-							<p>“I have watched this forest change for over 100 years.”</p>
-							<AudioButton text='I have watched this forest change for over 100 years.' className='mt-3 size-8' />
+				<div className='max-w-360 mx-auto p-3 sm:p-5 grid lg:grid-cols-[.9fr_1.1fr] gap-3 sm:gap-5 rounded-4xl bg-forest-800 dark:bg-cream-300 shadow-xl text-cream-50 overflow-hidden'>
+					<div className='relative min-h-80 p-6 flex items-end rounded-4xl bg-linear-to-b from-mist-200 to-mist-100 overflow-hidden'>
+						<img className='absolute inset-x-0 bottom-0 h-[92%] w-full mx-auto object-contain object-bottom transition-all duration-500 hover:scale-105' src={TreesImage} alt='Illustration of a red maple tree' />
+
+						<div className='relative z-10 max-w-xs p-4 inline-flex items-center justify-center rounded-2xl bg-cream-50/90 font-bold text-sm text-forest-900 shadow-lg backdrop-blur-sm'>
+							<p>“I have watched this forest change for over 100 years”</p>
+							<AudioButton text='I have watched this forest change for over 100 years.' />
 						</div>
 					</div>
 
-					<div className='bg-forest-800 p-6 text-cream-50 sm:p-10 lg:p-14'>
+					<div className='p-6 sm:p-10 lg:p-14 rounded-4xl bg-forest-800 text-cream-50'>
 						<div className='mb-6 flex items-center justify-between gap-4'>
 							<div>
 								<div className='mb-3 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-sage-300'>
