@@ -77,9 +77,9 @@ const Header = () => {
 	}, []);
 
 	return (
-		<header className={`fixed top-0 ${isNavOpen ? 'min-h-dvh overflow-hidden' : 'h-22'} z-50 w-full flex flex-wrap md:min-h-20 md:flex-nowrap items-center md:justify-start border-b-2 border-forest-800 dark:border-forest-800 bg-cream-300 dark:bg-forest-800`}>
-			<nav className={`${isNavOpen ? 'min-h-dvh overflow-hidden' : ''} relative w-full max-w-340 mx-auto flex flex-col py-2 px-4 sm:px-6 lg:px-8 md:min-h-20 md:flex-row md:items-center md:justify-between md:gap-3`}>
-				<div className='flex items-center justify-between gap-x-1'>
+		<header className={cn('fixed top-0 z-50 w-full flex flex-wrap md:min-h-22 md:flex-nowrap items-center md:justify-start shrink-0 border-b-2 border-forest-800 dark:border-cream-300 bg-cream-300 dark:bg-forest-800', isNavOpen ? 'min-h-dvh overflow-hidden' : 'h-22')}>
+			<nav className={cn('relative size-full max-w-340 md:min-h-22 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center md:justify-between md:gap-3', isNavOpen && 'min-h-dvh overflow-hidden')}>
+				<div className='h-22 flex items-center justify-between gap-x-1'>
 					<Link to='/' className='select-none flex flex-row items-center justify-start gap-2 shrink-0' aria-label='Woodland Conservation Area'>
 						<img className='h-auto w-14 shrink-0' src={TreeIcon} alt='Tree' />
 
@@ -106,14 +106,14 @@ const Header = () => {
 					</button>
 				</div>
 
-				<div id='site-navigation' className={`${isNavOpen ? 'flex' : 'hidden'} w-full py-2 md:w-auto md:flex md:py-0 flex-col md:flex-row md:items-center gap-0.5 md:gap-1`}>
-					<div className='flex w-full flex-1 flex-col justify-between gap-0.5 md:w-auto md:flex-none md:flex-row md:items-center md:justify-end md:gap-1'>
+				<div id='site-navigation' className={cn('min-h-[calc(100dvh-5.5rem)] w-full md:w-auto py-2 md:py-0 md:flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1', isNavOpen ? 'flex' : 'hidden')}>
+					<div className='flex w-full flex-1 flex-col justify-start gap-0.5 md:w-auto md:flex-none md:flex-row md:items-center md:justify-end md:gap-1'>
 						{NAV_LINKS?.map((navLink: NavLinkType, idx: number) => {
 							return (
 								<NavLink key={idx} to={navLink?.to} className={({ isActive }) => cn('nav-link relative', isActive && 'active')}>
 									{({ isActive }) => (
 										<>
-											{isActive && <motion.span layoutId='active-nav-link' className='absolute inset-0 rounded-xl bg-forest-700' transition={{ type: 'spring', stiffness: 500, damping: 35 }} />}
+											{isActive && <motion.span layoutId='active-nav-link' className='absolute inset-0 rounded-xl bg-forest-700 dark:bg-cream-300' transition={{ type: 'spring', stiffness: 500, damping: 35 }} />}
 											<span className='relative z-10'>{navLink?.label}</span>
 										</>
 									)}
@@ -126,7 +126,7 @@ const Header = () => {
 						<div className='select-none h-px md:h-4 w-full md:border-s border-forest-800'></div>
 					</div>
 
-					<div className='mt-auto flex w-full items-center justify-between gap-2 md:mt-0 md:w-auto md:justify-end'>
+					<div className='w-full md:w-auto mb-10 md:mb-0 md:mt-0 flex items-center justify-between md:justify-end gap-2'>
 						<div ref={languageMenuRef} className='relative'>
 							<button
 								type='button'

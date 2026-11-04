@@ -93,11 +93,12 @@ button {
     px-3 py-1.5
     inline-flex items-center justify-between md:justify-center
     font-semibold text-base text-neutral-900 hover:text-forest-700 focus:text-forest-700 active:text-forest-700
+    dark:text-neutral-200 dark:hover:text-cream-300 dark:focus:text-neutral-200 dark:active:text-neutral-200
     rounded-xl;
 }
 
 .nav-link.active {
-	@apply text-white;
+	@apply text-white dark:text-forest-800;
 }
 
 .btn {
