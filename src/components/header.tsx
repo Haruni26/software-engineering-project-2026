@@ -77,9 +77,9 @@ const Header = () => {
 	}, []);
 
 	return (
-		<header className={cn('fixed top-0 z-50 w-full flex flex-wrap md:min-h-22 md:flex-nowrap items-start md:items-center md:justify-start shrink-0 border-b-2 border-forest-800 dark:border-cream-300 bg-cream-300 dark:bg-forest-800', isNavOpen ? 'min-h-dvh overflow-hidden' : 'h-22')}>
-			<nav className={cn('relative h-22 w-full max-w-340 md:min-h-22 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center md:justify-between md:gap-3', isNavOpen && 'min-h-dvh overflow-hidden')}>
-				<div className='h-22 w-full flex items-center justify-between gap-x-1'>
+		<header className={cn('fixed top-0 z-50 w-full flex flex-wrap md:min-h-22 md:flex-nowrap md:items-center md:justify-start shrink-0 border-b-2 border-forest-800 dark:border-cream-300 bg-cream-300 dark:bg-forest-800', isNavOpen ? 'min-h-dvh overflow-hidden items-start' : 'h-22 items-center')}>
+			<nav className={cn('relative h-22 w-full max-w-340 md:min-h-22 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:justify-between md:gap-3', isNavOpen && 'min-h-dvh overflow-hidden')}>
+				<div className='h-22! w-full flex items-center justify-between shrink-0 gap-x-1'>
 					<Link to='/' className='select-none flex flex-row items-center justify-start gap-2 shrink-0' aria-label='Woodland Conservation Area'>
 						<img className='h-auto w-14 shrink-0' src={TreeIcon} alt='Tree' />
 
@@ -106,11 +106,13 @@ const Header = () => {
 					</button>
 				</div>
 
-				<div id='site-navigation' className={cn('min-h-[calc(100dvh-5.5rem)] w-full md:w-auto py-2 md:py-0 md:flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1', isNavOpen ? 'flex' : 'hidden')}>
+				<div
+					id='site-navigation'
+					className={cn('w-full md:w-auto py-2 md:py-0 md:flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1 overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out md:max-h-none md:opacity-100', isNavOpen ? 'flex min-h-[calc(100dvh-5.5rem)] max-h-[calc(100dvh-5.5rem)] opacity-100' : 'max-h-0 opacity-0 pointer-events-none md:pointer-events-auto')}>
 					<div className='flex w-full flex-1 flex-col justify-start gap-0.5 md:w-auto md:flex-none md:flex-row md:items-center md:justify-end md:gap-1'>
 						{NAV_LINKS?.map((navLink: NavLinkType, idx: number) => {
 							return (
-								<NavLink key={idx} to={navLink?.to} className={({ isActive }) => cn('nav-link relative', isActive && 'active')}>
+								<NavLink key={idx} to={navLink?.to} onClick={() => setIsNavOpen(false)} className={({ isActive }) => cn('nav-link relative', isActive && 'active')}>
 									{({ isActive }) => (
 										<>
 											{isActive && <motion.span layoutId='active-nav-link' className='absolute inset-0 rounded-xl bg-forest-700 dark:bg-cream-300' transition={{ type: 'spring', stiffness: 500, damping: 35 }} />}
