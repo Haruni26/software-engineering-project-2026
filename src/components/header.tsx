@@ -1,5 +1,7 @@
 import TreeIcon from '@/assets/img/tree-icon.png';
-import { ChevronDown, Globe2, Moon, Sun, Volume2 } from 'lucide-react';
+import { ChevronDown, Globe2, Moon, Sun, Volume2, VolumeX } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 type NavLinkType = {
@@ -8,37 +10,65 @@ type NavLinkType = {
 };
 
 const NAV_LINKS: NavLinkType[] = [
-	{
-		to: '/',
-		label: 'Home',
-	},
-	{
-		to: '/explore',
-		label: 'Explore',
-	},
-	{
-		to: '/animals',
-		label: 'Animals',
-	},
-	{
-		to: '/trees',
-		label: 'Trees',
-	},
-	{
-		to: '/visit',
-		label: 'Visit',
-	},
-	{
-		to: '/kids',
-		label: 'Kids',
-	},
-	{
-		to: '/about',
-		label: 'About',
-	},
+	{ to: '/', label: 'Home' },
+	{ to: '/explore', label: 'Explore' },
+	{ to: '/animals', label: 'Animals' },
+	{ to: '/trees', label: 'Trees' },
+	{ to: '/visit', label: 'Visit' },
+	{ to: '/kids', label: 'Kids' },
+	{ to: '/about', label: 'About' },
 ];
 
+const LANGUAGES = [
+	{ label: 'English', code: 'en' },
+	{ label: 'Français', code: 'fr' },
+	{ label: "Mi'kmaq", code: 'mic' },
+] as const;
+
 const Header = () => {
+	const languageMenuRef = useRef<HTMLDivElement>(null);
+
+	const [language, setLanguage] = useState<(typeof LANGUAGES)[number]['label']>('English');
+	const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState<boolean>(false);
+	const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+	const [isMuted, setIsMuted] = useState<boolean>(false);
+
+	const selectLanguage = (selectedLanguage: (typeof LANGUAGES)[number]) => {
+		setLanguage(selectedLanguage.label);
+		setIsLanguageMenuOpen(false);
+	};
+
+	useEffect(() => {
+		document.documentElement.classList.toggle('dark', isDarkMode);
+	}, [isDarkMode]);
+
+	useEffect(() => {
+		const selectedLanguage = LANGUAGES.find((option) => option.label === language);
+		document.documentElement.lang = selectedLanguage?.code ?? 'en';
+	}, [language]);
+
+	useEffect(() => {
+		const closeLanguageMenu = (event: MouseEvent) => {
+			if (languageMenuRef.current && !languageMenuRef.current.contains(event.target as Node)) {
+				setIsLanguageMenuOpen(false);
+			}
+		};
+
+		const handleEscape = (event: KeyboardEvent) => {
+			if (event.key === 'Escape') {
+				setIsLanguageMenuOpen(false);
+			}
+		};
+
+		document.addEventListener('mousedown', closeLanguageMenu);
+		document.addEventListener('keydown', handleEscape);
+
+		return () => {
+			document.removeEventListener('mousedown', closeLanguageMenu);
+			document.removeEventListener('keydown', handleEscape);
+		};
+	}, []);
+
 	return (
 		<header className='z-50 h-20 w-full flex flex-wrap md:flex-nowrap md:justify-start border-b-2 border-forest-800 bg-cream-300'>
 			<nav className='relative w-full max-w-340 mx-auto py-2 px-4 sm:px-6 lg:px-8 md:flex md:items-center md:justify-between md:gap-3'>
@@ -89,29 +119,48 @@ const Header = () => {
 					</div>
 
 					<div className='flex flex-wrap items-center justify-end gap-2'>
-						<button type='button' onClick={() => {}} className='min-h-10 px-3 py-1.5 inline-flex items-center justify-center gap-2 rounded-lg font-semibold text-sm text-forest-800 hover:text-forest-800 focus:text-forest-800 active:text-forest-800 bg-neutral-warm hover:bg-neutral-warm/90 focus:bg-neutral-warm/90 active:bg-neutral-warm/90'>
-							<span className='sr-only'>{/* TODO: ADD TEXT */}</span>
-							<Globe2 className='size-5 shrink-0' />
-							English
-							<ChevronDown className='size-4 ml-1 shrink-0' />
-						</button>
-
-						<div role='group' className='btn grid h-10 w-20 p-0! grid-cols-2 gap-0! bg-forest-800 overflow-hidden rounded-lg' aria-label='Theme'>
-							<button type='button' onClick={() => {}} aria-label='Use light theme' className='h-full w-full inline-flex items-center justify-center rounded-l-lg hover:bg-forest-800/90 focus:bg-forest-800/90 focus:outline-hidden'>
-								<Sun className='size-5 shrink-0 text-yellow-500' />
-								<span className='sr-only'>Light theme</span>
+						<div ref={languageMenuRef} className='relative'>
+							<button
+								type='button'
+								onClick={() => setIsLanguageMenuOpen((current) => !current)}
+								className='min-h-10 px-3 py-1.5 inline-flex items-center justify-center gap-2 rounded-lg border-2 border-forest-800 font-semibold text-sm text-forest-800 hover:text-forest-800 focus:text-forest-800 active:text-forest-800 bg-neutral-warm hover:bg-neutral-warm/90 focus:bg-neutral-warm/90 active:bg-neutral-warm/90'
+								aria-label='Select language'
+								aria-haspopup='listbox'
+								aria-expanded={isLanguageMenuOpen}>
+								<Globe2 className='size-5 shrink-0' />
+								{language}
+								<motion.span animate={{ rotate: isLanguageMenuOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+									<ChevronDown className='size-4 stroke-3 shrink-0' />
+								</motion.span>
 							</button>
 
-							<button type='button' onClick={() => {}} aria-label='Use dark theme' className='h-full w-full inline-flex items-center justify-center rounded-r-lg border-l-2 border-white/10 hover:bg-forest-800/90 focus:bg-forest-800/90 focus:outline-hidden'>
-								<Moon className='size-5 shrink-0 text-white/50' />
-								<span className='sr-only'>Dark theme</span>
-							</button>
+							<AnimatePresence>
+								{isLanguageMenuOpen && (
+									<motion.div role='listbox' aria-label='Available languages' className='absolute right-0 z-50 mt-2 min-w-40 overflow-hidden rounded-xl border border-forest-800/15 bg-cream-50 p-1 shadow-xl' initial={{ opacity: 0, y: -8, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.96 }} transition={{ duration: 0.15 }}>
+										{LANGUAGES.map((option) => (
+											<button key={option.code} type='button' role='option' aria-selected={language === option.label} onClick={() => selectLanguage(option)} className='flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold text-forest-800 hover:bg-cream-200'>
+												{option.label}
+												{language === option.label && <span aria-hidden='true'>✓</span>}
+											</button>
+										))}
+									</motion.div>
+								)}
+							</AnimatePresence>
 						</div>
 
-						<button type='button' onClick={() => {}} className='btn btn-primary btn-icon min-h-10'>
-							<Volume2 className='size-5 shrink-0' />
-							<span className='sr-only'>{/* TODO: ADD TEXT */}</span>
-						</button>
+						<motion.button type='button' onClick={() => setIsDarkMode((current) => !current)} aria-label={isDarkMode ? 'Use light theme' : 'Use dark theme'} aria-pressed={isDarkMode} className='btn btn-primary btn-icon min-h-10' whileTap={{ scale: 0.9 }}>
+							<motion.span animate={{ rotate: isDarkMode ? 0 : 180 }} transition={{ duration: 0.3 }}>
+								{isDarkMode ? <Moon className='size-5 shrink-0 text-white/70' /> : <Sun className='size-5 shrink-0 text-yellow-500' />}
+							</motion.span>
+							<span className='sr-only'>{isDarkMode ? 'Light theme' : 'Dark theme'}</span>
+						</motion.button>
+
+						<motion.button type='button' onClick={() => setIsMuted((current) => !current)} aria-label={isMuted ? 'Unmute audio' : 'Mute audio'} aria-pressed={isMuted} className='btn btn-primary btn-icon min-h-10' whileTap={{ scale: 0.9 }}>
+							<motion.span animate={{ rotate: isMuted ? 0 : 360 }} transition={{ duration: 0.3 }}>
+								{isMuted ? <VolumeX className='size-5 shrink-0' /> : <Volume2 className='size-5 shrink-0' />}
+							</motion.span>
+							<span className='sr-only'>{isMuted ? 'Unmute audio' : 'Mute audio'}</span>
+						</motion.button>
 					</div>
 				</div>
 			</nav>
