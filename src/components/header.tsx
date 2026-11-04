@@ -1,4 +1,5 @@
 import TreeIcon from '@/assets/img/tree-icon.png';
+import { cn } from '@/lib';
 import { ChevronDown, Globe2, Moon, Sun, Volume2, VolumeX } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
@@ -79,8 +80,8 @@ const Header = () => {
 	}, []);
 
 	return (
-		<header className={`${isNavOpen ? 'min-h-[100dvh] overflow-hidden' : 'min-h-20'} z-50 w-full flex flex-wrap md:min-h-20 md:flex-nowrap md:justify-start border-b-2 border-forest-800 bg-cream-300`}>
-			<nav className={`${isNavOpen ? 'min-h-[100dvh] overflow-hidden' : ''} relative w-full max-w-340 mx-auto flex flex-col py-2 px-4 sm:px-6 lg:px-8 md:min-h-20 md:flex-row md:items-center md:justify-between md:gap-3`}>
+		<header className={`${isNavOpen ? 'min-h-dvh overflow-hidden' : 'min-h-20'} z-50 w-full flex flex-wrap md:min-h-20 md:flex-nowrap md:justify-start border-b-2 border-forest-800 bg-cream-300`}>
+			<nav className={`${isNavOpen ? 'min-h-dvh overflow-hidden' : ''} relative w-full max-w-340 mx-auto flex flex-col py-2 px-4 sm:px-6 lg:px-8 md:min-h-20 md:flex-row md:items-center md:justify-between md:gap-3`}>
 				<div className='flex items-center justify-between gap-x-1'>
 					<Link to='/' className='select-none flex flex-row items-center justify-start gap-2 shrink-0' aria-label='Woodland Conservation Area'>
 						<img className='h-auto w-14 shrink-0' src={TreeIcon} alt='Tree' />
@@ -111,8 +112,13 @@ const Header = () => {
 					<div className='flex w-full flex-1 flex-col justify-between gap-0.5 md:w-auto md:flex-none md:flex-row md:items-center md:justify-end md:gap-1'>
 						{NAV_LINKS?.map((navLink: NavLinkType, idx: number) => {
 							return (
-								<NavLink key={idx} to={navLink?.to} className='nav-link min-h-10 w-full justify-between md:w-auto md:justify-center'>
-									{navLink?.label}
+								<NavLink key={idx} to={navLink?.to} className={({ isActive }) => cn('nav-link relative', isActive && 'active')}>
+									{({ isActive }) => (
+										<>
+											{isActive && <motion.span layoutId='active-nav-link' className='absolute inset-0 rounded-xl bg-forest-800' transition={{ type: 'spring', stiffness: 500, damping: 35 }} />}
+											<span className='relative z-10'>{navLink?.label}</span>
+										</>
+									)}
 								</NavLink>
 							);
 						})}
@@ -127,12 +133,15 @@ const Header = () => {
 							<button
 								type='button'
 								onClick={() => setIsLanguageMenuOpen((current) => !current)}
-								className='min-h-10 px-3 py-1.5 inline-flex items-center justify-center gap-2 rounded-lg border-2 border-forest-800 font-semibold text-sm text-forest-800 hover:text-forest-800 focus:text-forest-800 active:text-forest-800 bg-neutral-warm hover:bg-neutral-warm/90 focus:bg-neutral-warm/90 active:bg-neutral-warm/90'
+								className='min-h-10 min-w-36 px-3 py-1.5 inline-flex items-center justify-between gap-2 rounded-lg border-2 border-forest-800 font-semibold text-sm text-forest-800 hover:text-forest-800 focus:text-forest-800 active:text-forest-800 bg-neutral-warm hover:bg-neutral-warm/90 focus:bg-neutral-warm/90 active:bg-neutral-warm/90'
 								aria-label='Select language'
 								aria-haspopup='listbox'
 								aria-expanded={isLanguageMenuOpen}>
-								<Globe2 className='size-5 shrink-0' />
-								{language}
+								<div className='inline-flex items-center justify-center gap-2'>
+									<Globe2 className='size-5 shrink-0' />
+									{language}
+								</div>
+
 								<motion.span animate={{ rotate: isLanguageMenuOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
 									<ChevronDown className='size-4 stroke-3 shrink-0' />
 								</motion.span>
@@ -155,7 +164,7 @@ const Header = () => {
 						<div className='flex items-center gap-2'>
 							<motion.button type='button' onClick={() => setIsDarkMode((current) => !current)} aria-label={isDarkMode ? 'Use light theme' : 'Use dark theme'} aria-pressed={isDarkMode} className='btn btn-primary btn-icon min-h-10' whileTap={{ scale: 0.9 }}>
 								<motion.span animate={{ rotate: isDarkMode ? 0 : 180 }} transition={{ duration: 0.3 }}>
-									{isDarkMode ? <Moon className='size-5 shrink-0 text-white/70' /> : <Sun className='size-5 shrink-0 text-yellow-500' />}
+									{isDarkMode ? <Moon className='size-5 shrink-0 text-blue-500' /> : <Sun className='size-5 shrink-0 text-yellow-500' />}
 								</motion.span>
 
 								<span className='sr-only'>{isDarkMode ? 'Light theme' : 'Dark theme'}</span>
