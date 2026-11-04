@@ -274,10 +274,10 @@ const LandingPage = () => {
 							))}
 						</div>
 
-						<button type='button' onClick={() => say('Learn more about the red maple and its role in the forest.')} className='btn btn-primary mt-8 bg-sage-300! text-forest-950! hover:bg-sage-200!'>
+						<Button onClick={() => say('Learn more about the red maple and its role in the forest.')} variant='secondary' size='md' radius='lg' fullWidth={false} className='mt-8'>
 							Listen to a tree
-							<Volume2 className='size-4' />
-						</button>
+							<Volume2 className='select-none size-4 stroke-3 shrink-0' />
+						</Button>
 					</div>
 				</div>
 			</section>
