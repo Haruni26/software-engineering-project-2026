@@ -33,6 +33,11 @@
 	@apply bg-forest-700 text-white;
 }
 
+.dark::selection,
+.dark *::selection {
+	@apply bg-white text-forest-700;
+}
+
 html,
 body {
 }
@@ -73,7 +78,8 @@ button {
 }
 
 .nav-link {
-	@apply min-h-10 w-full xl:w-auto
+	@apply select-none
+    min-h-10 w-full xl:w-auto
     px-3 py-1.5
     inline-flex items-center justify-between xl:justify-center
     font-semibold text-base text-neutral-900 hover:text-forest-700 focus:text-forest-700 active:text-forest-700

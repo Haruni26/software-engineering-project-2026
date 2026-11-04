@@ -93,7 +93,7 @@ const Header = () => {
 	}, []);
 
 	return (
-		<header className={cn('fixed top-0 z-50 w-full flex flex-wrap xl:min-h-22 xl:flex-nowrap xl:items-center xl:justify-start shrink-0 border-b-2 border-forest-800 dark:border-cream-300 bg-cream-300 dark:bg-forest-800', isNavOpen ? 'min-h-dvh overflow-hidden items-start' : 'h-22 items-center')}>
+		<motion.header layoutRoot className={cn('fixed top-0 z-50 w-full flex flex-wrap xl:min-h-22 xl:flex-nowrap xl:items-center xl:justify-start shrink-0 border-b-2 border-forest-800 dark:border-cream-300 bg-cream-300 dark:bg-forest-800', isNavOpen ? 'min-h-dvh overflow-hidden items-start' : 'h-22 items-center')}>
 			<nav className={cn('relative h-22 w-full max-w-340 xl:min-h-22 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col xl:flex-row xl:justify-between xl:gap-3', isNavOpen && 'min-h-dvh overflow-hidden')}>
 				<div className='h-22! w-full xl:w-auto flex items-center justify-between shrink-0 gap-x-1'>
 					<Link to='/' className='select-none flex flex-row items-center justify-start gap-2 shrink-0' aria-label='Woodland Conservation Area'>
@@ -129,7 +129,12 @@ const Header = () => {
 								<NavLink key={idx} to={navLink?.to} onClick={() => setIsNavOpen(false)} className={({ isActive }) => cn('nav-link relative', isActive && 'active')}>
 									{({ isActive }) => (
 										<>
-											{isActive && <motion.span layoutId='active-nav-link' className='absolute inset-0 rounded-xl bg-forest-700 dark:bg-cream-300' transition={{ type: 'spring', stiffness: 500, damping: 35 }} />}
+											{isActive && (
+												<>
+													<motion.span aria-hidden='true' layoutId='active-nav-link' className='pointer-events-none absolute inset-0 hidden rounded-xl bg-forest-700 xl:block dark:bg-cream-300' transition={{ type: 'spring', stiffness: 500, damping: 35 }} />
+													<span aria-hidden='true' className='pointer-events-none absolute inset-0 rounded-xl bg-forest-700 xl:hidden dark:bg-cream-300' />
+												</>
+											)}
 											<span className='relative z-10'>{navLink?.label}</span>
 										</>
 									)}
@@ -195,7 +200,7 @@ const Header = () => {
 					</div>
 				</div>
 			</nav>
-		</header>
+		</motion.header>
 	);
 };
 
