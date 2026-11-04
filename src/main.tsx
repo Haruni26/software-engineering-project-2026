@@ -1,9 +1,7 @@
 import '@/assets/css/index.css';
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
-import { ScrollToTop } from '@/components/scroll-to-top';
-import { ThemeProvider } from '@/context/theme-context';
-import { LandingPage } from '@/pages/landing';
+import { Footer, Header, ScrollToTop } from '@/components';
+import { ThemeProvider } from '@/context';
+import { ExplorePage, LandingPage } from '@/pages';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
@@ -18,7 +16,7 @@ createRoot(root!).render(
 
 				<Routes>
 					<Route path='/' element={<LandingPage />} />
-					<Route path='/explore' element={<LandingPage />} />
+					<Route path='/explore' element={<ExplorePage />} />
 					<Route path='/animals' element={<LandingPage />} />
 					<Route path='/trees' element={<LandingPage />} />
 					<Route path='/visit' element={<LandingPage />} />

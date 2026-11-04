@@ -6,12 +6,10 @@ import NatureMatchingImage from '@/assets/img/nature-matching.png';
 import RaccoonImage from '@/assets/img/raccoon.png';
 import TrailsImage from '@/assets/img/trails.png';
 import TreesImage from '@/assets/img/trees.png';
-import { AudioButton } from '@/components/audio-button';
-import { type CardType } from '@/components/card';
+import { AudioButton, Card, type CardType } from '@/components';
 import { ArrowRight, Compass, Leaf, TreePine, Volume2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Card } from '../components/card';
 
 const lakePhoto = 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1100&q=85';
 
@@ -133,7 +131,7 @@ const LandingPage = () => {
 	}, []);
 
 	return (
-		<main className='min-h-screen mt-22 flex flex-col gap-20'>
+		<main className='main'>
 			<section ref={heroRef} className='relative isolate min-h-[calc(100dvh-5.5rem)] flex items-center overflow-hidden bg-mist-300'>
 				<img ref={backgroundRef} className='absolute inset-0 -z-30 select-none size-full origin-center object-cover object-center will-change-transform' src={BackgroundImage} alt="Illustrated woodland overlooking St. Margaret's Bay with a deer, evergreen trees, and a young explorer" />
 				<div className='absolute inset-0 -z-20 select-none bg-black/30' aria-hidden='true' />

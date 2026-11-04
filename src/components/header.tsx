@@ -1,5 +1,5 @@
 import TreeIcon from '@/assets/img/tree-icon.png';
-import { useTheme } from '@/context/theme-context';
+import { useTheme } from '@/context';
 import { cn } from '@/lib';
 import { ChevronDown, Globe2, Moon, Sun, SunMoon, Volume2, VolumeX } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
@@ -42,14 +42,20 @@ const Header = () => {
 	};
 
 	useEffect(() => {
-		if (!isNavOpen) return;
+		if (!isNavOpen) {
+			return;
+		}
 
 		const desktop = window.matchMedia('(min-width: 80rem)');
+
 		const closeOnDesktop = () => {
-			if (desktop.matches) setIsNavOpen(false);
+			if (desktop.matches) {
+				setIsNavOpen(false);
+			}
 		};
 
 		closeOnDesktop();
+
 		desktop.addEventListener('change', closeOnDesktop);
 		document.body.style.overflow = 'hidden';
 
@@ -116,9 +122,7 @@ const Header = () => {
 					</button>
 				</div>
 
-				<div
-					id='site-navigation'
-					className={cn('w-full xl:w-auto py-2 xl:py-0 flex flex-col xl:flex-row xl:items-center gap-0.5 xl:gap-1 max-xl:overflow-hidden max-xl:transition-[max-height,opacity,visibility] duration-300 ease-in-out', isNavOpen ? 'max-xl:min-h-[calc(100dvh-5.5rem)] max-xl:max-h-[calc(100dvh-5.5rem)]' : 'max-xl:max-h-0 max-xl:invisible max-xl:opacity-0')}>
+				<div id='site-navigation' className={cn('w-full xl:w-auto py-2 xl:py-0 flex flex-col xl:flex-row xl:items-center gap-0.5 xl:gap-1 max-xl:overflow-hidden max-xl:transition-[max-height,opacity,visibility] duration-300 ease-in-out', isNavOpen ? 'max-xl:min-h-[calc(100dvh-5.5rem)] max-xl:max-h-[calc(100dvh-5.5rem)]' : 'max-xl:max-h-0 max-xl:invisible max-xl:opacity-0')}>
 					<div className='flex w-full flex-1 flex-col justify-start gap-0.5 xl:w-auto xl:flex-none xl:flex-row xl:items-center xl:justify-end xl:gap-1'>
 						{NAV_LINKS?.map((navLink: NavLinkType, idx: number) => {
 							return (

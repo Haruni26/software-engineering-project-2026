@@ -59,33 +59,17 @@ button {
 	@apply select-none;
 }
 
-@keyframes tree-sway {
-	0%,
-	100% {
-		transform: rotate(calc(var(--tree-rotation) - 2deg));
-	}
-
-	50% {
-		transform: rotate(calc(var(--tree-rotation) + 2deg));
-	}
-}
-
-.tree-sway {
-	animation: tree-sway 3s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.tree-sway {
-		animation: none;
-	}
-}
-
 .nunito {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 800;
 	font-size: 20px;
 	line-height: 1.1;
 	letter-spacing: -0.5px;
+}
+
+.main {
+	@apply min-h-screen mt-22
+    flex flex-col gap-20;
 }
 
 .nav-link {
@@ -122,4 +106,25 @@ button {
 
 .btn-icon {
 	@apply p-1.5! aspect-square!;
+}
+
+@keyframes tree-sway {
+	0%,
+	100% {
+		transform: rotate(calc(var(--tree-rotation) - 2deg));
+	}
+
+	50% {
+		transform: rotate(calc(var(--tree-rotation) + 2deg));
+	}
+}
+
+.tree-sway {
+	animation: tree-sway 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tree-sway {
+		animation: none;
+	}
 }
