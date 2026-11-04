@@ -2,26 +2,30 @@ import { Volume2 } from 'lucide-react';
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-function say(text: string) {
-	if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
-		return;
-	}
-
-	window.speechSynthesis.cancel();
-
-	const speech = new SpeechSynthesisUtterance(text);
-	speech.rate = 0.9;
-
-	window.speechSynthesis.speak(speech);
+interface AudioButtonProps {
+	text: string;
 }
 
-function AudioButton({ text, className = '' }: { text: string; className?: string }) {
+const AudioButton: FC<AudioButtonProps> = ({ text }) => {
+	const say = (text: string) => {
+		if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+			return;
+		}
+
+		window.speechSynthesis.cancel();
+
+		const speech = new SpeechSynthesisUtterance(text);
+		speech.rate = 0.9;
+
+		window.speechSynthesis.speak(speech);
+	};
+
 	return (
-		<button type='button' onClick={() => say(text)} title='Read aloud' aria-label={`Read aloud: ${text}`} className={`inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-white/80 bg-white/90 text-forest-700 shadow-sm transition hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 ${className}`}>
+		<button type='button' onClick={() => say(text)} className='size-10 inline-flex items-center justify-center shrink-0 rounded-full border-2 border-forest-700 bg-white/90 text-forest-700 shadow-sm hover:scale-105' title='Read aloud' aria-label={`Read aloud: ${text}`}>
 			<Volume2 size={20} strokeWidth={2.6} />
 		</button>
 	);
-}
+};
 
 type CardType = {
 	title: string;
