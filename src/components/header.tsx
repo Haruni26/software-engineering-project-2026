@@ -108,6 +108,7 @@ const Header = () => {
 
 						<div className='flex flex-col items-start justify-center'>
 							<span className='font-semibold text-xl! text-forest-800 dark:text-cream-300 nunito'>{t('siteName')}</span>
+
 							<p className='-mt-1 font-medium text-sm! text-neutral-600 dark:text-neutral-200 nunito' lang={textLanguage('location')}>
 								{t('location')}
 							</p>
@@ -143,6 +144,7 @@ const Header = () => {
 													<span aria-hidden='true' className='pointer-events-none absolute inset-0 rounded-xl bg-forest-700 xl:hidden dark:bg-cream-300' />
 												</>
 											)}
+
 											<span className='relative z-10'>{t(navLink.label)}</span>
 										</>
 									)}
