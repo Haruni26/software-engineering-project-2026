@@ -184,32 +184,32 @@ const LandingPage = () => {
 
 			<section className='relative z-10 w-full px-4 sm:px-8 lg:px-12'>
 				<div className='max-w-360 mx-auto p-3 sm:p-5 grid lg:grid-cols-[1.05fr_.95fr] gap-3 sm:gap-5 rounded-4xl bg-forest-800 dark:bg-cream-300 shadow-xl text-cream-50 overflow-hidden'>
-					<div className='p-6 sm:p-10 lg:p-14 flex flex-col justify-between rounded-4xl bg-cream-300 dark:bg-forest-800'>
+					<div className='p-6 sm:p-10 lg:p-14 flex flex-col justify-between rounded-4xl bg-cream-300 text-forest-950 dark:bg-forest-800 dark:text-cream-50'>
 						<div>
-							<div className='mb-6 px-3 py-1.5 inline-flex items-center gap-2 rounded-full border border-sage-300/30 bg-sage-300/10 font-bold text-sm text-sage-300'>
+							<div className='mb-6 px-3 py-1.5 inline-flex items-center gap-2 rounded-full border border-forest-700/25 bg-sage-300/25 font-bold text-sm text-forest-700 dark:border-sage-300/30 dark:bg-sage-300/10 dark:text-sage-300'>
 								<Leaf className='select-none size-4 shrink-0' />
 								Our shared home
 							</div>
 
 							<h2 className='max-w-xl text-4xl font-black tracking-tight sm:text-5xl'>A place worth protecting.</h2>
 
-							<p className='mt-5 max-w-xl text-base leading-relaxed text-cream-400 sm:text-lg'>Woodland connects forests, lakes, wildlife and people. Every visit helps us understand this place and care for it for generations to come.</p>
+							<p className='mt-5 max-w-xl text-base leading-relaxed text-forest-800 dark:text-cream-400 sm:text-lg'>Woodland connects forests, lakes, wildlife and people. Every visit helps us understand this place and care for it for generations to come.</p>
 						</div>
 
-						<div className='mt-10 grid grid-cols-3 gap-3 border-t border-white/15 pt-6 sm:gap-6'>
+						<div className='mt-10 grid grid-cols-3 gap-3 border-t border-forest-800/20 dark:border-white/15 pt-6 sm:gap-6'>
 							<div>
-								<p className='text-2xl font-black text-sage-300 sm:text-3xl'>100+</p>
-								<p className='mt-1 text-xs text-muted-green-400 sm:text-sm'>years of stories</p>
+								<p className='text-2xl font-black text-forest-700 dark:text-sage-300 sm:text-3xl'>100+</p>
+								<p className='mt-1 text-xs text-forest-800 dark:text-muted-green-400 sm:text-sm'>years of stories</p>
 							</div>
 
 							<div>
-								<p className='text-2xl font-black text-sage-300 sm:text-3xl'>4</p>
-								<p className='mt-1 text-xs text-muted-green-400 sm:text-sm'>ways to explore</p>
+								<p className='text-2xl font-black text-forest-700 dark:text-sage-300 sm:text-3xl'>4</p>
+								<p className='mt-1 text-xs text-forest-800 dark:text-muted-green-400 sm:text-sm'>ways to explore</p>
 							</div>
 
 							<div>
-								<p className='text-2xl font-black text-sage-300 sm:text-3xl'>1</p>
-								<p className='mt-1 text-xs text-muted-green-400 sm:text-sm'>shared responsibility</p>
+								<p className='text-2xl font-black text-forest-700 dark:text-sage-300 sm:text-3xl'>1</p>
+								<p className='mt-1 text-xs text-forest-800 dark:text-muted-green-400 sm:text-sm'>shared responsibility</p>
 							</div>
 						</div>
 					</div>
