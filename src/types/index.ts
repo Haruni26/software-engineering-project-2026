@@ -1,3 +1,4 @@
+import type { TranslationsType } from '@/contexts/audio-context';
 import { type CSSProperties } from 'react';
 
 type CardType = {
@@ -5,6 +6,7 @@ type CardType = {
 	desc: string;
 	to: string;
 	image: string;
+	audioTranslations?: TranslationsType;
 };
 
 type NavLinkType = {

@@ -1,5 +1,5 @@
 import TreeIcon from '@/assets/img/tree-icon.png';
-import { useTheme } from '@/context';
+import { useAudio, useTheme } from '@/contexts';
 import { cn } from '@/lib';
 import type { NavLinkType } from '@/types';
 import { ChevronDown, Globe2, Moon, Sun, SunMoon, Volume2, VolumeX } from 'lucide-react';
@@ -24,17 +24,16 @@ const LANGUAGES = [
 ] as const;
 
 const Header = () => {
+	const { language, isMuted, error, setLanguage, toggleMute } = useAudio();
 	const { cycleTheme, isDarkMode, theme } = useTheme();
 	const languageMenuRef = useRef<HTMLDivElement>(null);
 
-	const [language, setLanguage] = useState<(typeof LANGUAGES)[number]['label']>('English');
 	const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState<boolean>(false);
-	const [isMuted, setIsMuted] = useState<boolean>(false);
 	const [hasScrolled, setHasScrolled] = useState(() => window.scrollY > 0);
 	const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
 	const selectLanguage = (selectedLanguage: (typeof LANGUAGES)[number]) => {
-		setLanguage(selectedLanguage.label);
+		setLanguage(selectedLanguage.code);
 		setIsLanguageMenuOpen(false);
 	};
 
@@ -42,7 +41,10 @@ const Header = () => {
 		const handleScroll = () => setHasScrolled(window.scrollY > 0);
 
 		handleScroll();
-		window.addEventListener('scroll', handleScroll, { passive: true });
+
+		window.addEventListener('scroll', handleScroll, {
+			passive: true,
+		});
 
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
@@ -70,11 +72,6 @@ const Header = () => {
 			document.body.style.overflow = '';
 		};
 	}, [isNavOpen]);
-
-	useEffect(() => {
-		const selectedLanguage = LANGUAGES.find((option) => option.label === language);
-		document.documentElement.lang = selectedLanguage?.code ?? 'en';
-	}, [language]);
 
 	useEffect(() => {
 		const closeLanguageMenu = (event: MouseEvent) => {
@@ -159,12 +156,12 @@ const Header = () => {
 								type='button'
 								onClick={() => setIsLanguageMenuOpen((current) => !current)}
 								className='min-h-10 min-w-36 px-3 py-1.5 inline-flex items-center justify-between gap-2 rounded-xl border-2 border-forest-800 font-semibold text-sm text-forest-800 hover:text-forest-800 focus:text-forest-800 active:text-forest-800 bg-neutral-warm hover:bg-neutral-warm/90 focus:bg-neutral-warm/90 active:bg-neutral-warm/90'
-								aria-label='Select language'
+								aria-label='Select audio language'
 								aria-haspopup='listbox'
 								aria-expanded={isLanguageMenuOpen}>
 								<div className='inline-flex items-center justify-center gap-2'>
 									<Globe2 className='size-5 shrink-0' />
-									{language}
+									{LANGUAGES?.find((option) => option.code === language)?.label}
 								</div>
 
 								<motion.span animate={{ rotate: isLanguageMenuOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -176,9 +173,9 @@ const Header = () => {
 								{isLanguageMenuOpen && (
 									<motion.div role='listbox' aria-label='Available languages' className='absolute right-0 z-50 mt-2 min-w-40 overflow-hidden rounded-xl border border-forest-800/15 bg-cream-50 p-1 shadow-xl' initial={{ opacity: 0, y: -8, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.96 }} transition={{ duration: 0.15 }}>
 										{LANGUAGES?.map((option, idx: number) => (
-											<button key={idx} type='button' onClick={() => selectLanguage(option)} className='w-full px-3 py-2 flex items-center justify-between rounded-xl text-left text-sm font-semibold text-forest-800 hover:bg-cream-200' role='option' aria-selected={language === option.label}>
+											<button key={idx} type='button' onClick={() => selectLanguage(option)} className='w-full px-3 py-2 flex items-center justify-between rounded-xl text-left text-sm font-semibold text-forest-800 hover:bg-cream-200' role='option' aria-selected={language === option?.code}>
 												{option.label}
-												{language === option.label && <span aria-hidden='true'>✓</span>}
+												{language === option.code && <span aria-hidden='true'>✓</span>}
 											</button>
 										))}
 									</motion.div>
@@ -195,17 +192,23 @@ const Header = () => {
 								<span className='sr-only'>{theme} theme</span>
 							</motion.button>
 
-							<motion.button type='button' onClick={() => setIsMuted((current) => !current)} aria-label={isMuted ? 'Unmute audio' : 'Mute audio'} aria-pressed={isMuted} className='btn btn-primary btn-icon min-h-10' whileTap={{ scale: 0.9 }}>
-								<motion.span animate={{ rotate: isMuted ? 0 : 360 }} transition={{ duration: 0.3 }}>
-									{isMuted ? <VolumeX className='size-5 shrink-0' /> : <Volume2 className='size-5 shrink-0' />}
-								</motion.span>
-
-								<span className='sr-only'>{isMuted ? 'Unmute audio' : 'Mute audio'}</span>
+							<motion.button
+								type='button'
+								onClick={toggleMute}
+								className='btn btn-primary btn-icon min-h-10'
+								aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
+								title={isMuted ? 'Unmute audio' : 'Mute audio'}
+								whileTap={{ scale: 0.9 }}>
+								{isMuted ? <VolumeX aria-hidden='true' className='size-5 shrink-0' /> : <Volume2 aria-hidden='true' className='size-5 shrink-0' />}
 							</motion.button>
 						</div>
 					</div>
 				</div>
 			</nav>
+
+			<div role='status' className='fixed inset-x-4 bottom-6 mx-auto w-fit max-w-[calc(100%-2rem)] xl:absolute xl:top-full xl:bottom-auto xl:mt-2'>
+				{error && <p className='rounded-xl bg-cream-50 px-4 py-2 text-sm font-semibold text-forest-800 shadow-md'>{error}</p>}
+			</div>
 		</motion.header>
 	);
 };
