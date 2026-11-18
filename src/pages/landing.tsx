@@ -269,12 +269,7 @@ const LandingPage = () => {
 							))}
 						</div>
 
-						<AudioButton
-							label='Listen to a tree'
-							text='Learn more about the red maple and its role in the forest.'
-							translations={{ fr: 'Découvrez l’érable rouge et son rôle dans la forêt.' }}
-							className='mt-8'
-						/>
+						<AudioButton label='Listen to a tree' text='Learn more about the red maple and its role in the forest.' translations={{ fr: 'Découvrez l’érable rouge et son rôle dans la forêt.' }} className='mt-8' />
 					</div>
 				</div>
 			</section>
