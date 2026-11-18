@@ -137,8 +137,8 @@ const TreesPage = () => {
       <PageHero
         title="Trees"
         description="Get to know the trees of the Acadian forest around St. Margaret’s Bay, and learn how to tell them apart."
+        backgroundImage="https://images.unsplash.com/photo-1604244151622-42ffc3b61bb2?q=80&w=2232&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
       />
-
       <section aria-labelledby="trees-intro" className={shell}>
         <div className="flex flex-col gap-6">
           <h2 id="trees-intro" className={sectionHeading}>
