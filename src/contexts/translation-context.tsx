@@ -1,5 +1,5 @@
+import { useAudio, type LanguageType } from '@/contexts';
 import { createContext, useContext, type PropsWithChildren } from 'react';
-import { useAudio, type LanguageType } from './audio-context';
 
 const english = {
 	siteName: 'Woodland Conservation Area',
@@ -23,9 +23,9 @@ const english = {
 	darkTheme: 'Switch to dark theme',
 };
 
-type HeaderKey = keyof typeof english;
+type HeaderKeyType = keyof typeof english;
 
-const headerTranslations: Record<LanguageType, Partial<Record<HeaderKey, string>>> = {
+const headerTranslations: Record<LanguageType, Partial<Record<HeaderKeyType, string>>> = {
 	en: english,
 	fr: {
 		siteName: 'Aire de conservation Woodland',
@@ -60,8 +60,8 @@ const headerTranslations: Record<LanguageType, Partial<Record<HeaderKey, string>
 interface TranslationContextValue {
 	language: LanguageType;
 	setLanguage: (language: LanguageType) => void;
-	t: (key: HeaderKey) => string;
-	textLanguage: (key: HeaderKey) => LanguageType;
+	t: (key: HeaderKeyType) => string;
+	textLanguage: (key: HeaderKeyType) => LanguageType;
 }
 
 const TranslationContext = createContext<TranslationContextValue | undefined>(undefined);
@@ -70,7 +70,17 @@ const TranslationProvider = ({ children }: PropsWithChildren) => {
 	const { language, setLanguage } = useAudio();
 	const messages = headerTranslations[language];
 
-	return <TranslationContext.Provider value={{ language, setLanguage, t: (key) => messages[key] ?? english[key], textLanguage: (key) => (messages[key] ? language : 'en') }}>{children}</TranslationContext.Provider>;
+	return (
+		<TranslationContext.Provider
+			value={{
+				language,
+				setLanguage,
+				t: (key) => messages[key] ?? english[key],
+				textLanguage: (key) => (messages[key] ? language : 'en'),
+			}}>
+			{children}
+		</TranslationContext.Provider>
+	);
 };
 
 const useTranslation = () => {

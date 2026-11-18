@@ -75,8 +75,12 @@ const PageHero: FC<PageHeroProps> = ({ title, description, backgroundImage }) =>
 
 	return (
 		<section ref={heroRef} className='relative isolate min-h-64 sm:min-h-72 flex items-center bg-forest-800 overflow-hidden' aria-labelledby={titleId}>
-			<img ref={backgroundRef} className='absolute inset-0 -z-30 select-none size-full origin-center object-cover object-center will-change-transform' src={backgroundImage} alt={title} />
-			<div className='absolute inset-0 -z-20 select-none bg-black/30' aria-hidden='true' />
+			{backgroundImage && (
+				<>
+					<img ref={backgroundRef} className='absolute inset-0 -z-30 select-none size-full origin-center object-cover object-center will-change-transform' src={backgroundImage} alt={title} />
+					<div className='absolute inset-0 -z-20 select-none bg-black/30' aria-hidden='true' />
+				</>
+			)}
 
 			<div className='relative w-full max-w-340 mx-auto px-4 py-10 sm:px-6 lg:px-8'>
 				<h1 id={titleId} className='max-w-3xl font-bold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight'>
