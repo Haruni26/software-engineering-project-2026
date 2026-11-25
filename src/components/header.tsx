@@ -32,6 +32,10 @@ const Header = () => {
 	const [hasScrolled, setHasScrolled] = useState(() => window.scrollY > 0);
 	const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
+	const navigationAction = isNavOpen ? 'closeNavigation' : 'openNavigation';
+	const themeAction = theme === 'system' ? 'lightTheme' : theme === 'light' ? 'darkTheme' : 'systemTheme';
+	const audioAction = isMuted ? 'unmute' : 'mute';
+
 	const selectLanguage = (selectedLanguage: (typeof LANGUAGES)[number]) => {
 		setLanguage(selectedLanguage.code);
 		setIsLanguageMenuOpen(false);
@@ -94,10 +98,6 @@ const Header = () => {
 			document.removeEventListener('keydown', handleEscape);
 		};
 	}, []);
-
-	const navigationAction = isNavOpen ? 'closeNavigation' : 'openNavigation';
-	const themeAction = theme === 'system' ? 'lightTheme' : theme === 'light' ? 'darkTheme' : 'systemTheme';
-	const audioAction = isMuted ? 'unmute' : 'mute';
 
 	return (
 		<motion.header layoutRoot className={cn('fixed top-0 z-50 w-full flex flex-wrap xl:min-h-22 xl:flex-nowrap xl:items-center xl:justify-start shrink-0 border-b-2 bg-cream-300 dark:bg-forest-800', hasScrolled ? 'border-forest-800 dark:border-cream-300' : 'border-transparent', isNavOpen ? 'min-h-dvh overflow-hidden items-start' : 'h-22 items-center')}>
