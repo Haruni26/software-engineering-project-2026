@@ -1,5 +1,5 @@
 import TreeIcon from '@/assets/img/tree-icon.png';
-import { useAudio, useTheme, useTranslation } from '@/contexts';
+import { useAudio, useTextSize, useTheme, useTranslation } from '@/contexts';
 import { cn } from '@/lib';
 import { ChevronDown, Globe2, Moon, Sun, SunMoon, Volume2, VolumeX } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
@@ -26,6 +26,7 @@ const Header = () => {
 	const { isMuted, error, toggleMute } = useAudio();
 	const { language, setLanguage, t, textLanguage } = useTranslation();
 	const { cycleTheme, isDarkMode, theme } = useTheme();
+	const { canDecrease, canIncrease, decrease, increase, reset } = useTextSize();
 	const languageMenuRef = useRef<HTMLDivElement>(null);
 
 	const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState<boolean>(false);
@@ -107,9 +108,9 @@ const Header = () => {
 						<img className='h-auto w-14 shrink-0' src={TreeIcon} alt='' />
 
 						<div className='flex flex-col items-start justify-center'>
-							<span className='font-semibold text-xl! text-forest-800 dark:text-cream-300 nunito'>{t('siteName')}</span>
+							<span className='font-normal text-xl! text-forest-800 dark:text-cream-300 nunito'>{t('siteName')}</span>
 
-							<p className='-mt-1 font-medium text-sm! text-neutral-600 dark:text-neutral-200 nunito' lang={textLanguage('location')}>
+							<p className='-mt-1 font-normal text-sm! text-neutral-600 dark:text-neutral-200 nunito' lang={textLanguage('location')}>
 								{t('location')}
 							</p>
 						</div>
@@ -118,7 +119,7 @@ const Header = () => {
 					<button
 						type='button'
 						onClick={() => setIsNavOpen((current) => !current)}
-						className='xl:hidden relative size-10 flex justify-center items-center rounded-xl bg-forest-800 dark:bg-cream-300 hover:bg-forest-700 dark:hover:bg-cream-400 text-white dark:text-green-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-800'
+						className='xl:hidden relative size-10 flex justify-center items-center rounded-xl bg-forest-800 dark:bg-cream-300 hover:bg-forest-700 dark:hover:bg-cream-400 text-white dark:text-forest-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-800 dark:focus-visible:outline-cream-300'
 						aria-expanded={isNavOpen}
 						aria-controls='site-navigation'
 						aria-label={t(navigationAction)}
@@ -154,7 +155,7 @@ const Header = () => {
 					</div>
 
 					<div className='my-2 xl:my-0 xl:ml-2 xl:mr-4'>
-						<div className='select-none h-px xl:h-4 w-full xl:border-s border-forest-800'></div>
+						<div className='select-none h-px xl:h-4 w-full xl:border-s border-forest-800 dark:border-cream-300'></div>
 					</div>
 
 					<div className='w-full xl:w-auto mb-10 xl:mb-0 xl:mt-0 flex items-center justify-between xl:justify-end gap-2'>
@@ -162,7 +163,7 @@ const Header = () => {
 							<button
 								type='button'
 								onClick={() => setIsLanguageMenuOpen((current) => !current)}
-								className='min-h-10 min-w-36 px-3 py-1.5 inline-flex items-center justify-between gap-2 rounded-xl border-2 border-forest-800 font-semibold text-sm text-forest-800 hover:text-forest-800 focus:text-forest-800 active:text-forest-800 bg-neutral-warm hover:bg-neutral-warm/90 focus:bg-neutral-warm/90 active:bg-neutral-warm/90'
+								className='min-h-10 min-w-36 px-3 py-1.5 inline-flex items-center justify-between gap-2 rounded-xl border-2 border-forest-800 dark:border-cream-300 font-normal text-sm text-forest-800 hover:text-forest-800 focus:text-forest-800 active:text-forest-800 bg-neutral-warm hover:bg-neutral-warm/90 focus:bg-neutral-warm/90 active:bg-neutral-warm/90'
 								aria-label={t('selectLanguage')}
 								lang={textLanguage('selectLanguage')}
 								aria-haspopup='listbox'
@@ -189,7 +190,7 @@ const Header = () => {
 										exit={{ opacity: 0, y: -8, scale: 0.96 }}
 										transition={{ duration: 0.15 }}>
 										{LANGUAGES.map((option) => (
-											<button key={option.code} lang={option.code} type='button' onClick={() => selectLanguage(option)} className='w-full px-3 py-2 flex items-center justify-between rounded-xl text-left text-sm font-semibold text-forest-800 hover:bg-cream-200' role='option' aria-selected={language === option.code}>
+											<button key={option.code} lang={option.code} type='button' onClick={() => selectLanguage(option)} className='w-full px-3 py-2 flex items-center justify-between rounded-xl text-left text-sm font-normal text-forest-800 hover:bg-cream-200' role='option' aria-selected={language === option.code}>
 												{option.label}
 												{language === option.code && <span aria-hidden='true'>✓</span>}
 											</button>
@@ -199,10 +200,23 @@ const Header = () => {
 							</AnimatePresence>
 						</div>
 
+						<div role='group' aria-label='Text size' className='flex items-center gap-2'>
+	<button type='button' onClick={decrease} disabled={!canDecrease} aria-label='Decrease text size' className='btn btn-primary btn-icon min-h-10'>
+		<span aria-hidden='true'>A−</span>
+	</button>
+
+	<button type='button' onClick={reset} aria-label='Reset text size' className='btn btn-primary btn-icon min-h-10'>
+		<span aria-hidden='true'>A</span>
+	</button>
+
+	<button type='button' onClick={increase} disabled={!canIncrease} aria-label='Increase text size' className='btn btn-primary btn-icon min-h-10'>
+		<span aria-hidden='true'>A+</span>
+	</button>
+</div>
 						<div className='flex items-center gap-2'>
-							<motion.button type='button' onClick={cycleTheme} aria-label={t(themeAction)} lang={textLanguage(themeAction)} aria-pressed={theme === 'dark'} className='btn btn-primary btn-icon min-h-10' whileTap={{ scale: 0.9 }}>
+							<motion.button type='button' onClick={cycleTheme} aria-label={t(themeAction)} lang={textLanguage(themeAction)} className='btn btn-primary btn-icon min-h-10' whileTap={{ scale: 0.9 }}>
 								<motion.span animate={{ rotate: theme === 'system' ? 0 : isDarkMode ? 0 : 360 }} transition={{ duration: 0.3 }}>
-									{theme === 'system' ? <SunMoon className='size-5 shrink-0 text-white' /> : isDarkMode ? <Moon className='size-5 shrink-0 text-blue-500' /> : <Sun className='size-5 shrink-0 text-yellow-500' />}
+									{theme === 'system' ? <SunMoon aria-hidden='true' className='size-5 shrink-0' /> : isDarkMode ? <Moon aria-hidden='true' className='size-5 shrink-0' /> : <Sun aria-hidden='true' className='size-5 shrink-0' />}
 								</motion.span>
 							</motion.button>
 
@@ -215,7 +229,7 @@ const Header = () => {
 			</nav>
 
 			<div role='status' className='fixed inset-x-4 bottom-6 mx-auto w-fit max-w-[calc(100%-2rem)] xl:absolute xl:top-full xl:bottom-auto xl:mt-2'>
-				{error && <p className='rounded-xl bg-cream-50 px-4 py-2 text-sm font-semibold text-forest-800 shadow-md'>{error}</p>}
+				{error && <p className='rounded-xl bg-cream-50 px-4 py-2 text-sm font-normal text-forest-800 shadow-md'>{error}</p>}
 			</div>
 		</motion.header>
 	);

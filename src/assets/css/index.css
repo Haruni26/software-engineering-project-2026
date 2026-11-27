@@ -38,8 +38,17 @@
 	@apply bg-white text-forest-700;
 }
 
-html,
+html {
+	font-size: calc(112.5% * var(--text-scale, 1));
+}
+
 body {
+	font-family: Calibri, Carlito, 'Segoe UI', Arial, sans-serif;
+	font-weight: 400;
+	line-height: 1.2;
+	hyphens: none;
+	overflow-wrap: normal;
+	word-break: normal;
 }
 
 a,
@@ -55,6 +64,23 @@ textarea {
     disabled:opacity-50 disabled:pointer-events-none;
 }
 
+a:focus-visible,
+input:focus-visible,
+button:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+	outline: 3px solid var(--color-forest-700);
+	outline-offset: 2px;
+}
+
+.dark a:focus-visible,
+.dark input:focus-visible,
+.dark button:focus-visible,
+.dark select:focus-visible,
+.dark textarea:focus-visible {
+	outline-color: var(--color-cream-300);
+}
+
 a,
 button {
 	@apply cursor-pointer;
@@ -65,9 +91,9 @@ button {
 }
 
 .nunito {
-	font-family: 'Nunito', sans-serif;
-	font-weight: 800;
-	font-size: 20px;
+	font-family: Calibri, Carlito, 'Segoe UI', Arial, sans-serif;
+	font-weight: 400;
+	font-size: 1.25rem;
 	line-height: 1.1;
 	letter-spacing: -0.5px;
 }
@@ -82,7 +108,7 @@ button {
     min-h-10 w-full xl:w-auto
     px-3 py-1.5
     inline-flex items-center justify-between xl:justify-center
-    font-semibold text-base text-neutral-900 hover:text-forest-700 focus:text-forest-700 active:text-forest-700
+    font-normal text-base text-neutral-900 hover:text-forest-700 focus:text-forest-700 active:text-forest-700
     dark:text-neutral-200 dark:hover:text-cream-300 dark:focus:text-neutral-200 dark:active:text-neutral-200
     rounded-xl;
 }
@@ -95,7 +121,7 @@ button {
 	@apply select-none cursor-pointer
     px-6 py-1.5
     inline-flex items-center justify-center gap-2
-    font-bold text-base
+    font-normal text-base
     rounded-xl;
 }
 

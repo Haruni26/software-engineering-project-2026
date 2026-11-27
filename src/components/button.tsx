@@ -18,9 +18,21 @@ const Button: FC<ButtonProps> = ({ className, variant = 'primary', size = 'md', 
 		variant: {
 			primary: 'btn-primary',
 			secondary: 'btn-secondary',
-			outline: 'border border-forest-800 bg-transparent text-forest-800 hover:bg-forest-800 hover:text-white focus-visible:outline-forest-800',
-			ghost: 'bg-transparent text-forest-800 hover:bg-cream-200 focus-visible:outline-forest-800',
-			danger: 'bg-red-700 text-white hover:bg-red-800 focus-visible:outline-red-700',
+			outline: cn(
+				'border border-forest-700 bg-transparent text-forest-700',
+				'hover:bg-forest-700 hover:text-white focus-visible:outline-forest-700',
+				'dark:border-cream-300 dark:text-cream-50 dark:hover:bg-cream-300 dark:hover:text-forest-800 dark:focus-visible:outline-cream-300',
+			),
+			ghost: cn(
+				'bg-transparent text-forest-700',
+				'hover:bg-cream-200 focus-visible:outline-forest-700',
+				'dark:text-cream-50 dark:hover:bg-forest-700 dark:focus-visible:outline-cream-300',
+			),
+			danger: cn(
+				'bg-forest-950 text-white',
+				'hover:bg-forest-800 focus-visible:outline-forest-950',
+				'dark:bg-cream-50 dark:text-forest-950 dark:hover:bg-cream-200 dark:focus-visible:outline-cream-300',
+			),
 		},
 		size: {
 			xs: 'min-h-8 px-2.5 text-xs',
@@ -39,11 +51,11 @@ const Button: FC<ButtonProps> = ({ className, variant = 'primary', size = 'md', 
 
 	const classes = cn(buttonVariants.base, buttonVariants.variant[variant], buttonVariants.size[size], buttonVariants.radius[radius], fullWidth && 'w-full', className);
 
-	if (props.to !== undefined) {
-		return <Link className={classes} {...props} />;
+		if ('to' in props && props.to !== undefined) {
+		return <Link className={classes} {...(props as ComponentPropsWithRef<typeof Link>)} />;
 	}
 
-	const { type = 'button', ...buttonProps } = props;
+	const { type = 'button', ...buttonProps } = props as ComponentPropsWithRef<'button'>;
 
 	return <button type={type} className={classes} {...buttonProps} />;
 };
