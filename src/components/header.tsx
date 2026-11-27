@@ -1,5 +1,5 @@
 import TreeIcon from '@/assets/img/tree-icon.png';
-import { useAudio, useTheme, useTranslation } from '@/contexts';
+import { useAudio, useTextSize, useTheme, useTranslation } from '@/contexts';
 import { cn } from '@/lib';
 import { ChevronDown, Globe2, Moon, Sun, SunMoon, Volume2, VolumeX } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
@@ -26,6 +26,7 @@ const Header = () => {
 	const { isMuted, error, toggleMute } = useAudio();
 	const { language, setLanguage, t, textLanguage } = useTranslation();
 	const { cycleTheme, isDarkMode, theme } = useTheme();
+	const { canDecrease, canIncrease, decrease, increase, reset } = useTextSize();
 	const languageMenuRef = useRef<HTMLDivElement>(null);
 
 	const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState<boolean>(false);
@@ -199,6 +200,19 @@ const Header = () => {
 							</AnimatePresence>
 						</div>
 
+						<div role='group' aria-label='Text size' className='flex items-center gap-2'>
+	<button type='button' onClick={decrease} disabled={!canDecrease} aria-label='Decrease text size' className='btn btn-primary btn-icon min-h-10'>
+		<span aria-hidden='true'>A−</span>
+	</button>
+
+	<button type='button' onClick={reset} aria-label='Reset text size' className='btn btn-primary btn-icon min-h-10'>
+		<span aria-hidden='true'>A</span>
+	</button>
+
+	<button type='button' onClick={increase} disabled={!canIncrease} aria-label='Increase text size' className='btn btn-primary btn-icon min-h-10'>
+		<span aria-hidden='true'>A+</span>
+	</button>
+</div>
 						<div className='flex items-center gap-2'>
 							<motion.button type='button' onClick={cycleTheme} aria-label={t(themeAction)} lang={textLanguage(themeAction)} className='btn btn-primary btn-icon min-h-10' whileTap={{ scale: 0.9 }}>
 								<motion.span animate={{ rotate: theme === 'system' ? 0 : isDarkMode ? 0 : 360 }} transition={{ duration: 0.3 }}>
