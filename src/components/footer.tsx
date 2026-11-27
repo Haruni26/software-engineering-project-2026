@@ -32,11 +32,11 @@ const Footer = () => {
 			<div className='relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-8 sm:px-10 lg:px-12'>
 				<div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-x-8 gap-y-12'>
 					<div className='max-w-xs col-span-2 md:col-span-1'>
-						<Link to='/' className='select-none flex flex-col items-start justify-center gap-2 shrink-0 font-semibold text-xl! text-white nunito' aria-label='Woodland Conservation Area'>
+						<Link to='/' className='select-none flex flex-col items-start justify-center gap-2 shrink-0 font-normal text-xl! text-white nunito' aria-label='Woodland Conservation Area'>
 							Woodland Conservation Area
 						</Link>
 
-						<p className='mt-2 text-sm text-muted-green-500 leading-relaxed'>A special place for people, wildlife, and future generations.</p>
+						<p className='mt-2 text-sm text-muted-green-500 leading-[1.2]'>A special place for people, wildlife, and future generations.</p>
 
 						<div className='mt-6 flex items-start gap-2 text-sm text-sage-200'>
 							<MapPin className='select-none size-5 mt-0.5 shrink-0 text-sage-300' />
@@ -51,7 +51,7 @@ const Footer = () => {
 
 					{Object.entries(footerLinks).map(([title, links]) => (
 						<div key={title}>
-							<h4 className='mb-5 font-extrabold text-sm text-muted-green-200 tracking-wide'>{title}</h4>
+							<h4 className='mb-5 font-normal text-sm text-muted-green-200 tracking-wide'>{title}</h4>
 
 							<ul className='space-y-3.5'>
 								{links.map((link, idx: number) => (

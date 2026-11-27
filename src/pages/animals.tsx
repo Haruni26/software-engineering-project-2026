@@ -122,8 +122,8 @@ const visitorTips = [
 ];
 
 const shell = 'w-full max-w-340 mx-auto px-4 sm:px-6 lg:px-8';
-const sectionHeading = 'text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl';
-const bodyCopy = 'max-w-xl text-base leading-relaxed sm:text-lg';
+const sectionHeading = 'text-4xl font-normal leading-[1.2] tracking-tight sm:text-5xl lg:text-6xl';
+const bodyCopy = 'max-w-xl text-base leading-[1.2] sm:text-lg';
 const focusOnPage = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-800 dark:focus-visible:outline-cream-300';
 const focusOnDark = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream-50';
 
@@ -166,14 +166,14 @@ export const AnimalsPage = () => {
 							{habitat.animals.map((animal) => (
 								<li key={animal.name} className={cn('p-5', 'rounded-xl border-l-4 bg-cream-100/85', 'sm:p-6', 'dark:bg-forest-800/90', habitat.accent)}>
 									<h3 className='nunito'>{animal.name}</h3>
-									<p className='mt-2 text-base leading-relaxed'>{animal.about}</p>
-									<dl className={cn('flex flex-col gap-3 mt-4 pt-4', 'border-t border-forest-800/15', 'text-base leading-relaxed text-forest-800', 'sm:flex-row sm:gap-8', 'dark:border-cream-300/20 dark:text-muted-green-400')}>
+									<p className='mt-2 text-base leading-[1.2]'>{animal.about}</p>
+									<dl className={cn('flex flex-col gap-3 mt-4 pt-4', 'border-t border-forest-800/15', 'text-base leading-[1.2] text-forest-800', 'sm:flex-row sm:gap-8', 'dark:border-cream-300/20 dark:text-muted-green-400')}>
 										<div className='sm:flex-1'>
-											<dt className='font-bold'>Look for</dt>
+											<dt className='font-normal'>Look for</dt>
 											<dd>{animal.lookFor}</dd>
 										</div>
 										<div className='sm:flex-1'>
-											<dt className='font-bold'>Best time</dt>
+											<dt className='font-normal'>Best time</dt>
 											<dd>{animal.bestTime}</dd>
 										</div>
 									</dl>
@@ -196,8 +196,8 @@ export const AnimalsPage = () => {
 					<ul className='grid grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2'>
 						{visitorTips.map((tip) => (
 							<li key={tip.title} className='pt-4 border-t border-cream-300/20'>
-								<h3 className='text-xl font-bold tracking-tight'>{tip.title}</h3>
-								<p className='mt-2 text-base leading-relaxed'>{tip.text}</p>
+								<h3 className='text-xl font-normal tracking-tight'>{tip.title}</h3>
+								<p className='mt-2 text-base leading-[1.2]'>{tip.text}</p>
 							</li>
 						))}
 					</ul>

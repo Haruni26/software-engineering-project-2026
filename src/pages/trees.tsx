@@ -124,8 +124,8 @@ const seasons = [
 
 const shell = "w-full max-w-340 mx-auto px-4 sm:px-6 lg:px-8";
 const sectionHeading =
-  "text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl";
-const bodyCopy = "max-w-xl text-base leading-relaxed sm:text-lg";
+  "text-4xl font-normal leading-[1.2] tracking-tight sm:text-5xl lg:text-6xl";
+const bodyCopy = "max-w-xl text-base leading-[1.2] sm:text-lg";
 const focusOnPage =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-800 dark:focus-visible:outline-cream-300";
 const focusOnDark =
@@ -204,22 +204,22 @@ const TreesPage = () => {
                   )}
                 >
                   <h3 className="nunito">{tree.name}</h3>
-                  <p className="mt-2 text-base leading-relaxed">{tree.about}</p>
+                  <p className="mt-2 text-base leading-[1.2]">{tree.about}</p>
                   <dl
                     className={cn(
                       "flex flex-col gap-3 mt-4 pt-4",
                       "border-t border-forest-800/15",
-                      "text-base leading-relaxed text-forest-800",
+                      "text-base leading-[1.2] text-forest-800",
                       "sm:flex-row sm:gap-8",
                       "dark:border-cream-300/20 dark:text-muted-green-400",
                     )}
                   >
                     <div className="sm:flex-1">
-                      <dt className="font-bold">{group.leafLabel}</dt>
+                      <dt className="font-normal">{group.leafLabel}</dt>
                       <dd>{tree.leaves}</dd>
                     </div>
                     <div className="sm:flex-1">
-                      <dt className="font-bold">Bark</dt>
+                      <dt className="font-normal">Bark</dt>
                       <dd>{tree.bark}</dd>
                     </div>
                   </dl>
@@ -255,10 +255,10 @@ const TreesPage = () => {
                 key={season.title}
                 className="pt-4 border-t border-cream-300/20"
               >
-                <h3 className="text-xl font-bold tracking-tight">
+                <h3 className="text-xl font-normal tracking-tight">
                   {season.title}
                 </h3>
-                <p className="mt-2 text-base leading-relaxed">{season.text}</p>
+                <p className="mt-2 text-base leading-[1.2]">{season.text}</p>
               </li>
             ))}
           </ul>

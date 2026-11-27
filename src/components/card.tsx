@@ -16,9 +16,9 @@ const Card: FC<CardType> = ({ title, desc, to, image, audioTranslations }) => {
 					<AudioButton className='size-9' text={`${title}. ${desc}`} translations={audioTranslations} />
 				</div>
 
-				<p className='max-w-47.5 mt-1 mb-2 text-sm sm:text-base leading-snug'>{desc}</p>
+				<p className='max-w-47.5 mt-1 mb-2 text-sm sm:text-base leading-[1.2]'>{desc}</p>
 
-				<Link to={to} className='select-none font-bold text-sm text-forest-700 dark:text-sage-300 decoration-2 underline underline-offset-2 hover:opacity-80'>
+				<Link to={to} className='select-none font-normal text-sm text-forest-700 dark:text-sage-300 decoration-2 underline underline-offset-2 hover:opacity-80'>
 					Explore {title}
 				</Link>
 			</div>

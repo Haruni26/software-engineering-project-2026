@@ -55,7 +55,7 @@ const ContactForm = ({ email }: { email: string | undefined }) => {
 
 				return (
 					<div key={field.name} className='flex flex-col gap-1.5'>
-						<label htmlFor={id} className='text-sm font-bold'>
+						<label htmlFor={id} className='text-sm font-normal'>
 							{field.label}
 						</label>
 						{field.name === 'message' ? (

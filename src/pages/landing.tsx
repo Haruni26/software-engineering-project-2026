@@ -148,17 +148,17 @@ const LandingPage = () => {
 				<div className='absolute inset-0 -z-20 select-none bg-black/30' aria-hidden='true' />
 
 				<div className='relative z-10 w-full max-w-7xl mx-auto -mt-20 px-5 pt-12 sm:pt-16 lg:pt-20 flex flex-col items-center text-center'>
-					<div className='mb-5 px-4 py-2 inline-flex items-center gap-2 rounded-full border border-forest-500/15 bg-cream-50/90 font-bold text-xs sm:text-sm text-forest-500 uppercase'>
+					<div className='mb-5 px-4 py-2 inline-flex items-center gap-2 rounded-full border border-forest-500/15 bg-cream-50/90 font-normal text-xs sm:text-sm text-forest-500 uppercase'>
 						<Leaf className='size-5 shrink-0 fill-sage-500' />A world of nature awaits
 					</div>
 
-					<h1 className='max-w-4xl font-bold text-5xl md:text-8xl text-white tracking-tight leading-[1.04]'>
+					<h1 className='max-w-4xl font-normal text-5xl md:text-8xl text-white tracking-tight leading-[1.04]'>
 						Explore. Learn.
 						<br />
 						Protect.
 					</h1>
 
-					<p className='max-w-xl mt-5 font-semibold text-white/90 text-base sm:text-lg md:text-xl leading-relaxed'>Step into the wonders of Woodland Conservation Area. Discover talking trees, curious wildlife, and the natural beauty of St. Margaret&apos;s Bay.</p>
+					<p className='max-w-xl mt-5 font-normal text-white/90 text-base sm:text-lg md:text-xl leading-[1.2]'>Step into the wonders of Woodland Conservation Area. Discover talking trees, curious wildlife, and the natural beauty of St. Margaret&apos;s Bay.</p>
 
 					<div className='w-full mt-8 flex flex-col md:flex-row items-center justify-center gap-4'>
 						<Button to='/explore' variant='primary' size='xl' radius='lg' fullWidth={false} className='w-full md:w-auto hover:-translate-y-1'>
@@ -186,14 +186,14 @@ const LandingPage = () => {
 				<div className='max-w-360 mx-auto p-3 sm:p-5 grid lg:grid-cols-[1.05fr_.95fr] gap-3 sm:gap-5 rounded-4xl bg-forest-800 dark:bg-cream-300 shadow-xl text-cream-50 overflow-hidden'>
 					<div className='p-6 sm:p-10 lg:p-14 flex flex-col justify-between rounded-4xl bg-cream-300 text-forest-950 dark:bg-forest-800 dark:text-cream-50'>
 						<div>
-							<div className='mb-6 px-3 py-1.5 inline-flex items-center gap-2 rounded-full border border-forest-700/25 bg-sage-300/25 font-bold text-sm text-forest-700 dark:border-sage-300/30 dark:bg-sage-300/10 dark:text-sage-300'>
+							<div className='mb-6 px-3 py-1.5 inline-flex items-center gap-2 rounded-full border border-forest-700/25 bg-sage-300/25 font-normal text-sm text-forest-700 dark:border-sage-300/30 dark:bg-sage-300/10 dark:text-sage-300'>
 								<Leaf className='select-none size-4 shrink-0' />
 								Our shared home
 							</div>
 
 							<h2 className='max-w-xl text-4xl font-black tracking-tight sm:text-5xl'>A place worth protecting.</h2>
 
-							<p className='mt-5 max-w-xl text-base leading-relaxed text-forest-800 dark:text-cream-400 sm:text-lg'>Woodland connects forests, lakes, wildlife and people. Every visit helps us understand this place and care for it for generations to come.</p>
+							<p className='mt-5 max-w-xl text-base leading-[1.2] text-forest-800 dark:text-cream-400 sm:text-lg'>Woodland connects forests, lakes, wildlife and people. Every visit helps us understand this place and care for it for generations to come.</p>
 						</div>
 
 						<div className='mt-10 grid grid-cols-3 gap-3 border-t border-forest-800/20 dark:border-white/15 pt-6 sm:gap-6'>
@@ -220,7 +220,7 @@ const LandingPage = () => {
 						<div className='absolute inset-0 bg-linear-to-t from-forest-950/60 via-transparent to-transparent' />
 
 						<div className='absolute right-5 bottom-5 left-5 flex items-end justify-between gap-4 text-white'>
-							<p className='max-w-xs text-sm font-bold leading-relaxed'>Protect the quiet places. Share the wonder.</p>
+							<p className='max-w-xs text-sm font-normal leading-[1.2]'>Protect the quiet places. Share the wonder.</p>
 							<AudioButton text='Protect the quiet places. Share the wonder.' translations={{ fr: 'Protégez les lieux paisibles. Partagez leur magie.' }} className='size-9' />
 						</div>
 					</div>
@@ -232,7 +232,7 @@ const LandingPage = () => {
 					<div className='relative min-h-80 p-6 flex items-end rounded-4xl bg-linear-to-b from-mist-200 to-mist-100 overflow-hidden'>
 						<img className='absolute inset-x-0 bottom-0 h-[92%] w-full mx-auto object-contain object-bottom transition-all duration-500 hover:scale-105' src={TreesImage} alt='Illustration of a red maple tree' />
 
-						<div className='relative z-10 max-w-xs p-4 inline-flex items-center justify-center rounded-2xl bg-cream-50/90 font-bold text-sm text-forest-900 shadow-lg backdrop-blur-sm'>
+						<div className='relative z-10 max-w-xs p-4 inline-flex items-center justify-center rounded-2xl bg-cream-50/90 font-normal text-sm text-forest-900 shadow-lg backdrop-blur-sm'>
 							<p>“I have watched this forest change for over 100 years”</p>
 							<AudioButton text='I have watched this forest change for over 100 years.' translations={{ fr: 'Je regarde cette forêt évoluer depuis plus de cent ans.' }} />
 						</div>
@@ -241,7 +241,7 @@ const LandingPage = () => {
 					<div className='p-6 sm:p-10 lg:p-14 rounded-4xl bg-forest-800 text-cream-50'>
 						<div className='mb-6 flex items-center justify-between gap-4'>
 							<div>
-								<div className='mb-3 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-sage-300'>
+								<div className='mb-3 inline-flex items-center gap-2 text-sm font-normal uppercase tracking-wider text-sage-300'>
 									<TreePine className='size-5' />
 									Voices of the forest
 								</div>
@@ -254,7 +254,7 @@ const LandingPage = () => {
 							</span>
 						</div>
 
-						<p className='max-w-xl text-base leading-relaxed text-cream-400 sm:text-lg'>Every tree has a role to play. Learn how the red maple supports wildlife, cleans the air, and shapes the forest around us.</p>
+						<p className='max-w-xl text-base leading-[1.2] text-cream-400 sm:text-lg'>Every tree has a role to play. Learn how the red maple supports wildlife, cleans the air, and shapes the forest around us.</p>
 
 						<div className='mt-8 grid gap-3 sm:grid-cols-3'>
 							{[
