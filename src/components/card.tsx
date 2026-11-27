@@ -12,7 +12,7 @@ const Card: FC<CardType> = ({ title, desc, to, image, audioTranslations }) => {
 
 			<div className='min-h-36 p-4 sm:p-5 rounded-t-[23px] bg-cream-100/85 dark:bg-forest-800/90'>
 				<div className='flex items-center justify-between gap-2'>
-					<h2 className='font-black text-2xl tracking-tight nunito'>{title}</h2>
+					<h2 className='font-normal text-2xl tracking-tight nunito'>{title}</h2>
 					<AudioButton className='size-9' text={`${title}. ${desc}`} translations={audioTranslations} />
 				</div>
 

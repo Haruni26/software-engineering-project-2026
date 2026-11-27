@@ -191,24 +191,24 @@ const LandingPage = () => {
 								Our shared home
 							</div>
 
-							<h2 className='max-w-xl text-4xl font-black tracking-tight sm:text-5xl'>A place worth protecting.</h2>
+							<h2 className='max-w-xl text-4xl font-normal tracking-tight sm:text-5xl'>A place worth protecting.</h2>
 
 							<p className='mt-5 max-w-xl text-base leading-[1.2] text-forest-800 dark:text-cream-400 sm:text-lg'>Woodland connects forests, lakes, wildlife and people. Every visit helps us understand this place and care for it for generations to come.</p>
 						</div>
 
 						<div className='mt-10 grid grid-cols-3 gap-3 border-t border-forest-800/20 dark:border-white/15 pt-6 sm:gap-6'>
 							<div>
-								<p className='text-2xl font-black text-forest-700 dark:text-sage-300 sm:text-3xl'>100+</p>
+								<p className='text-2xl font-normal text-forest-700 dark:text-sage-300 sm:text-3xl'>100+</p>
 								<p className='mt-1 text-xs text-forest-800 dark:text-muted-green-400 sm:text-sm'>years of stories</p>
 							</div>
 
 							<div>
-								<p className='text-2xl font-black text-forest-700 dark:text-sage-300 sm:text-3xl'>4</p>
+								<p className='text-2xl font-normal text-forest-700 dark:text-sage-300 sm:text-3xl'>4</p>
 								<p className='mt-1 text-xs text-forest-800 dark:text-muted-green-400 sm:text-sm'>ways to explore</p>
 							</div>
 
 							<div>
-								<p className='text-2xl font-black text-forest-700 dark:text-sage-300 sm:text-3xl'>1</p>
+								<p className='text-2xl font-normal text-forest-700 dark:text-sage-300 sm:text-3xl'>1</p>
 								<p className='mt-1 text-xs text-forest-800 dark:text-muted-green-400 sm:text-sm'>shared responsibility</p>
 							</div>
 						</div>
@@ -246,7 +246,7 @@ const LandingPage = () => {
 									Voices of the forest
 								</div>
 
-								<h2 className='text-4xl font-black tracking-tight sm:text-5xl'>Meet the trees.</h2>
+								<h2 className='text-4xl font-normal tracking-tight sm:text-5xl'>Meet the trees.</h2>
 							</div>
 
 							<span className='text-5xl' aria-hidden='true'>
@@ -263,7 +263,7 @@ const LandingPage = () => {
 								['4', 'seasons of color'],
 							].map(([value, label]) => (
 								<div key={label} className='rounded-2xl border border-white/10 bg-white/5 p-4'>
-									<p className='text-2xl font-black text-sage-300'>{value}</p>
+									<p className='text-2xl font-normal text-sage-300'>{value}</p>
 									<p className='mt-1 text-xs text-muted-green-400'>{label}</p>
 								</div>
 							))}
@@ -279,7 +279,7 @@ const LandingPage = () => {
 					<img className='h-20 w-auto shrink-0 transition-all duration-300 hover:scale-105' src={KidImage} alt='Kid' />
 
 					<div>
-						<h2 className='font-black text-4xl text-forest-800 dark:text-cream-300 nunito'>Kids Zone</h2>
+						<h2 className='font-normal text-4xl text-forest-800 dark:text-cream-300 nunito'>Kids Zone</h2>
 						<p className='text-neutral-600 dark:text-neutral-200'>Play, learn and explore the forest!</p>
 					</div>
 				</div>
